@@ -1,0 +1,122 @@
+﻿@model IEnumerable<GummyMeter.Models.MovieViewModel>
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="hero common-hero">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="hero-ct">
+					<h2 style="color:white;">Search Results for "@ViewBag.SearchQuery"</h2>
+					<ul class="breadcumb">
+						<li class="active"><a href="#">Home</a></li>
+						<li> <span class="ion-ios-arrow-right"></span> movie listing</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page-single">
+	<div class="container">
+		<div class="row ipad-width">
+		
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="topbar-filter">
+					
+					@if (ViewBag.TotalResults != null)
+					{
+						<p>Found <span>@ViewBag.TotalResults movies</span> in total</p>
+						
+					}
+					<label>Sort by:</label>
+					<select>
+						<option value="popularity">Popularity Descending</option>
+						<option value="popularity">Popularity Ascending</option>
+						<option value="rating">Rating Descending</option>
+						<option value="rating">Rating Ascending</option>
+						<option value="date">Release date Descending</option>
+						<option value="date">Release date Ascending</option>
+					</select>
+					@* <a href="movielist.html" class="list"><i class="ion-ios-list-outline "></i></a>
+					<a href="moviegrid.html" class="grid"><i class="ion-grid active"></i></a> *@
+				</div>
+				<div class="flex-wrap-movielist">
+					<!-- Insert forloop-->
+
+
+					@foreach (var item in Model) {
+								<div class="movie-item-style-2 movie-item-style-1">
+							<img src="@(item.PosterPath != null ? $"https://image.tmdb.org/t/p/w500/{item.PosterPath}" : "https://eticketsolutions.com/demo/themes/e-ticket/img/movie.jpg")" class="card-img-top" alt="@item.Title" loading="lazy" />
+									<div class="hvr-inner">
+										<a href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+									</div>
+									<div class="mv-item-infor">
+										<h6><a href="/Movies/Details/@item.Id">@item.Title</a></h6>
+										<p class="rate"><i class="ion-android-star"></i><span>@item.VoteAverage</span> /10</p>
+									</div>
+								</div>
+					}
+
+					@if (!Model.Any())
+					{
+						<p>No movies found matching "@ViewBag.SearchQuery".</p>
+					}
+				</div>
+				<div  style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+					
+
+					@if (ViewBag.TotalPages > 1)
+					{
+						<nav aria-label="Search result pages">
+							<ul class="pagination justify-content-center">
+								@if (ViewBag.CurrentPage > 1)
+								{
+									<li class="page-item">
+										<a class="page-link" href="/Movies/Search?query=@ViewBag.SearchQuery&page=@(ViewBag.CurrentPage - 1)"><i class="fa-solid fa-chevron-left"></i></a>
+									</li>
+								}
+
+								@for (int i = 1; i <= (int)ViewBag.TotalPages && i <= 10; i++) // Show up to 10 pages
+								{
+									<li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+										<a class="page-link" href="/Movies/Search?query=@ViewBag.SearchQuery&page=@i">@i</a>
+									</li>
+								}
+
+								@if (ViewBag.CurrentPage < ViewBag.TotalPages)
+								{
+									<li class="page-item">
+										<a class="page-link" href="/Movies/Search?query=@ViewBag.SearchQuery&page=@(ViewBag.CurrentPage + 1)"><i class="fa-solid fa-chevron-right"></i></a>
+									</li>
+								}
+							</ul>
+						</nav>
+					}
+
+					@* <div class="pagination2"> *@
+					@* 	<span>Page 1 of 2:</span> *@
+					@* 	<a class="active" href="#">1</a> *@
+					@* 	<a href="#">2</a> *@
+					@* 	<a href="#">3</a> *@
+					@* 	<a href="#">...</a> *@
+					@* 	<a href="#">78</a> *@
+					@* 	<a href="#">79</a> *@
+					@* 	<a href="#"><i class="ion-arrow-right-b"></i></a> *@
+					@* </div> *@
+				</div>
+
+
+			</div>
+
+			
+			</<div>
+
+		</div>
+
+	</div>
+</div>
+</div>
+ 

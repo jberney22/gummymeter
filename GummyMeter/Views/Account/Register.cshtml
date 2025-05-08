@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Register";
+    Layout = "";
+}
+
+<h2>Register</h2>
+
+<form asp-action="Register" method="post">
+    <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input name="username" class="form-control" required minlength="3" />
+    </div>
+    <div class="mb-3 position-relative">
+        <label class="form-label">Password</label>
+        <input id="password" name="password" type="password" class="form-control" required minlength="6" />
+        <button type="button" class="btn btn-sm btn-outline-secondary position-absolute end-0 top-0 mt-4 me-2" onclick="togglePassword('password')">
+            Show
+        </button>
+    </div>
+    <div class="mb-3 position-relative">
+        <label class="form-label">Confirm Password</label>
+        <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" required minlength="6" />
+        <button type="button" class="btn btn-sm btn-outline-secondary position-absolute end-0 top-0 mt-4 me-2" onclick="togglePassword('confirmPassword')">
+            Show
+        </button>
+    </div>
+    <button class="btn btn-primary" type="submit">Register</button>
+</form>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+
+        <div class="toast align-items-center text-white bg-danger border-0 fade show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <!-- Your error/success messages here -->
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <div>@error.ErrorMessage</div>
+                    }
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            if (input.type === "password") {
+                input.type = "text";
+            } else {
+                input.type = "password";
+            }
+        }
+    </script>
+}

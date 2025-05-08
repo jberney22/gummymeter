@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7 no-js" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8 no-js" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - MovieApp</title>
+	<!--Google Font-->
+	<link rel="stylesheet" href='//fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+
+	
+
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    
+
+	@*  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> *@
+	<link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+	<!--preloading-->
+	<div id="preloader">
+		<img class="logo" src="~/images/logo1.png" alt="" width="119" height="58">
+		<div id="status">
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<!--end of preloading-->
+
+		<!--login form popup-->
+		<div class="login-wrapper" id="login-content">
+			<div class="login-content">
+				<a href="#" class="close">x</a>
+				<h3>Login</h3>
+
+				<form asp-action="Login" asp-controller="Account" method="post">
+					<div class="row">
+						<label for="username">
+							Username:
+						<input type="text" name="username" id="username" placeholder="Enter Username" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
+						</label>
+					</div>
+
+					<div class="row">
+						<label for="password">
+							Password:
+							<input type="password" name="password" id="password" placeholder="******" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+						</label>
+					</div>
+					<div class="row">
+						<div class="remember">
+							<div>
+								<input type="checkbox" name="remember" value="Remember me"><span>Remember me</span>
+							</div>
+							<a href="#">Forget password ?</a>
+						</div>
+					</div>
+					<div class="row">
+						<button type="submit">Login</button>
+					</div>
+				</form>
+				<div class="row">
+					<p>Or via social</p>
+					<div class="social-btn-2">
+						<a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
+						<a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end of login form popup-->
+		<!--signup form popup-->
+		<div class="login-wrapper" id="signup-content">
+			<div class="login-content">
+				<a href="#" class="close">x</a>
+				<h3>sign up</h3>
+			<div id="registerContainer"></div>
+				@* @await Html.PartialAsync("_RegisterForm", new RegisterViewModel()) *@
+			</div>
+		</div>
+		<!--end of signup form popup-->
+
+	<!-- BEGIN | Header -->
+	<header class="ht-header">
+		<div class="container">
+			<nav class="navbar navbar-default navbar-custom">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header logo">
+					<div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<div id="nav-icon1">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+					<a href="index-2.html"><img class="logo" src="~/images/logo1.png" alt="" width="119" height="58"></a>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav flex-child-menu menu-left">
+						<li class="hidden">
+							<a href="#page-top"></a>
+						</li>
+						
+						<li class="dropdown first">
+							<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
+								movies<i class="fa fa-angle-down" aria-hidden="true"></i>
+							</a>
+							<ul class="dropdown-menu level1">
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Movie grid<i class="ion-ios-arrow-forward"></i></a>
+									<ul class="dropdown-menu level2">
+										<li><a href="moviegrid.html">Movie grid</a></li>
+										<li><a href="moviegridfw.html">movie grid full width</a></li>
+									</ul>
+								</li>
+								<li><a href="movielist.html">Movie list</a></li>
+								<li><a href="moviesingle.html">Movie single</a></li>
+								<li class="it-last"><a href="seriessingle.html">Series single</a></li>
+							</ul>
+						</li>
+						
+						@* <li class="dropdown first"> *@
+						@* 	<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown"> *@
+						@* 		news <i class="fa fa-angle-down" aria-hidden="true"></i> *@
+						@* 	</a> *@
+						@* 	<ul class="dropdown-menu level1"> *@
+						@* 		<li><a href="bloglist.html">blog List</a></li> *@
+						@* 		<li><a href="bloggrid.html">blog Grid</a></li> *@
+						@* 		<li class="it-last"><a href="blogdetail.html">blog Detail</a></li> *@
+						@* 	</ul> *@
+						@* </li> *@
+						@* <li class="dropdown first"> *@
+						@* 	<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown"> *@
+						@* 		community <i class="fa fa-angle-down" aria-hidden="true"></i> *@
+						@* 	</a> *@
+						@* 	<ul class="dropdown-menu level1"> *@
+						@* 		<li><a href="userfavoritegrid.html">user favorite grid</a></li> *@
+						@* 		<li><a href="userfavoritelist.html">user favorite list</a></li> *@
+						@* 		<li><a href="userprofile.html">user profile</a></li> *@
+						@* 		<li class="it-last"><a href="userrate.html">user rate</a></li> *@
+						@* 	</ul> *@
+						@* </li> *@
+					</ul>
+					<ul class="nav navbar-nav flex-child-menu menu-right">
+						@* <li class="dropdown first"> *@
+						@* 	<a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown"> *@
+						@* 		pages <i class="fa fa-angle-down" aria-hidden="true"></i> *@
+						@* 	</a> *@
+						@* 	<ul class="dropdown-menu level1"> *@
+						@* 		<li><a href="landing.html">Landing</a></li> *@
+						@* 		<li><a href="404.html">404 Page</a></li> *@
+						@* 		<li class="it-last"><a href="comingsoon.html">Coming soon</a></li> *@
+						@* 	</ul> *@
+						@* </li> *@
+						@* <li><a href="#">Help</a></li> *@
+						@if (!User.Identity.IsAuthenticated)
+						{
+							<li class="loginLink"><a href="#">LOG In</a></li>
+							<li class="btn signupLink"><a href="#">sign up</a></li>
+
+						}
+						else
+						{
+							<li>
+								<form method="post" asp-controller="Account" asp-action="Logout">
+									<button style="height: 3.6rem;border: none; background-color: #dd003f; color: #ffffff; width: 85px; border-radius: 25px;" type="submit" class="dropdown-item">
+										Logout
+									</button>
+								</form>
+							</li>
+						}
+
+
+					
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</nav>
+
+			<!-- top search form -->
+			<form class="d-flex" asp-controller="Movies" asp-action="Search" method="get">
+				<div class="top-search">
+					@* <select> *@
+					@* 	<option value="united">TV show</option> *@
+					@* 	<option value="saab">Others</option> *@
+					@* </select> *@
+					<input type="text" name="query" placeholder="Search for a movie, TV Show or celebrity that you are looking for">
+
+					<button  type="submit" style="height:4.6rem;border:none;background-color:#dd003f;color:#ffffff;">
+
+						Search
+					</button>
+				</div>
+				
+			</form>
+		</div>
+	</header>
+	<!-- END | Header -->
+
+    @* <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/">MovieApp</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Movies">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Movies/Search">Search</a>
+                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Favorites">Favorites</a>
+                        </li>
+                    }
+                </ul>
+                <ul class="navbar-nav">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form method="post" asp-controller="Account" asp-action="Logout">
+                            <button class="btn btn-outline-light" type="submit">Logout</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Account/Login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Account/Register">Register</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav> *@
+
+	@RenderBody()
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/jquery.js"></script>
+	<script src="~/js/plugins.js"></script>
+	<script src="~/js/plugins2.js"></script>
+	<script src="~/js/custom.js"></script>
+    @RenderSection("Scripts", required: false)
+    <script>
+        const toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        const toastList = toastElList.map(function (toastEl) {
+            const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+            toast.show();
+            return toast;
+        });
+    </script>
+	<script>
+		$(document).ready(function () {
+			// Load form
+			$("#registerContainer").load("/Account/Register");
+
+			// Handle submit via jQuery
+			$(document).on("submit", "#registerForm", function (e) {
+				e.preventDefault();
+
+				$.ajax({
+					url: $(this).attr("action"),
+					method: "POST",
+					data: $(this).serialize(),
+					success: function (res) {
+						if (res.success) {
+							$("#registerResult").html("<span style='color:green'>" + res.message + "</span>");
+							$("#registerForm")[0].reset();
+							window.location.href = '/Movies';
+						} else {
+							let errorHtml = "<ul style='color:red'>";
+							res.errors.forEach(err => {
+								err.errors.forEach(e => {
+									errorHtml += "<li>" + e + "</li>";
+								});
+							});
+							errorHtml += "</ul>";
+							$("#registerResult").html(errorHtml);
+						}
+					}
+				});
+			});
+		});
+	</script>
+
+
+</body>
+</html>

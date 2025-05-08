@@ -1,0 +1,120 @@
+﻿@{
+    ViewData["Title"] = "Trending Movies";
+    //@model List<GummyMeter.Models.MovieViewModel>
+	@model GummyMeter.Models.MovieViewModel2
+}
+
+@* <div class="text-center mb-4">
+    <button class="btn btn-primary m-1" onclick="loadCategory('GetTrending')">Trending</button>
+    <button class="btn btn-primary m-1" onclick="loadCategory('GetTopRated')">Top Rated</button>
+    <button class="btn btn-primary m-1" onclick="loadCategory('GetPopular')">Popular</button>
+    <button class="btn btn-primary m-1" onclick="loadCategory('GetNowPlaying')">Now Playing</button>
+    <button class="btn btn-primary m-1" onclick="loadCategory('GetUpcoming')">Upcoming</button>
+</div> *@
+
+<div id="sliderContainer">
+    @await Html.PartialAsync("_TrendingSlider", Model)
+</div>
+
+<div class="movie-items">
+	<div class="container">
+		<div class="row ipad-width">
+			<div class="col-md-8">
+				<div class="title-hd">
+					<h2>In Theater</h2>
+					<a href="#" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+				</div>
+				<div class="tabs">
+					<ul class="tab-links">
+						<li class="active"><a href="#tab1">#Popular</a></li>
+						<li><a href="#tab2"> #Coming soon</a></li>
+						<li><a href="#tab3">  #Top rated  </a></li>
+						<li><a href="#tab4"> #Now Playing</a></li>
+					</ul>
+					<div class="tab-content">
+						<div id="tab1" class="tab active">
+							<div class="row">
+								<!-- add partial view -->
+								@await Html.PartialAsync("_MovieCategories", Model.PopularMovies)
+							</div>
+						</div>
+						<div id="tab2" class="tab">
+							<div class="row">
+								@await Html.PartialAsync("_MovieCategories", Model.UpcomingMovies)
+							</div>
+						</div>
+						<div id="tab3" class="tab">
+							<div class="row">
+								@await Html.PartialAsync("_MovieCategories", Model.TopRatedMovies)
+
+							</div>
+						</div>
+						<div id="tab4" class="tab">
+							<div class="row">
+								@await Html.PartialAsync("_MovieCategories", Model.NowPlayingMovies)
+
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+			<div class="col-md-4">
+				<div class="sidebar">
+					<div class="ads">
+						<img src="images/uploads/ads1.png" alt="" width="336" height="296">
+					</div>
+					<div class="ads">
+						<img src="images/uploads/ads1.png" alt="" width="336" height="296">
+					</div>
+				@* 	<div class="ads">
+						<img src="images/uploads/ads1.png" alt="" width="336" height="296">
+					</div> *@
+					
+					
+
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+@section Scripts {
+	<script>
+		function loadCategory(action) {
+			// $.ajax({
+			// 	  type: "GET",
+			// 	  url:`/Movies/${action}`,
+			// 	  async: true,
+			// 	  cache: false,
+			// 	  dataType: "html",
+			// 	  success: function (data, textStatus, jqXHR) {
+			// 		$("#sliderContainer1").inn(data);
+			// 	  },
+			// 	  error: function (jqXHR, textStatus, errorThrown) {
+			// 		alert(textStatus + " - " + errorThrown);
+			// 	  }
+			// 	});
+
+			console.log('Loading category: ' + action); 
+			fetch(`/Movies/${action}`)
+				.then(response => {
+					if (!response.ok) throw new Error('Fetch failed');
+					return response.text();
+				})
+				.then(html => {
+					 $("#sliderContainer1").html(html);
+					document.getElementById('sliderContainer1').innerHTML = html;
+					rebindSliderStuff(); 
+				})
+				.catch(error => console.error('Fetch error:', error));
+		}
+
+		
+	</script>
+
+
+}

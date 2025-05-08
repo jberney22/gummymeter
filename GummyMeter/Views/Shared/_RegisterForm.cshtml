@@ -1,0 +1,35 @@
+﻿@model GummyMeter.Models.RegisterViewModel
+
+<form id="registerForm" asp-action="Register" asp-controller="Account" method="post" novalidate>
+	<div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+	<div class="row">
+		<label for="username-2" asp-for="Username">
+			Username:
+			<input type="text" name="Username" asp-for="Username" id="username-2" placeholder="Enter Username" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
+			<span asp-validation-for="Username" class="text-danger"></span>
+		</label>
+	</div>
+
+	<div class="row">
+		<label for="email-2">
+			your email:
+			<input type="email" name="email" id="email-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+		</label>
+	</div>
+	<div class="row">
+		<label for="password-2">
+			Password:
+			<input type="password" name="password" id="password-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+		</label>
+	</div>
+	<div class="row">
+		<label for="repassword-2">
+			re-type Password:
+			<input type="password" name="ConfirmPassword" id="repassword-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+		</label>
+	</div>
+	<div class="row">
+		<button type="submit">sign up</button>
+	</div>
+</form>
+<div id="registerResult"></div>
