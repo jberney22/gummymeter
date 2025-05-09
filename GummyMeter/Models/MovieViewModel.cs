@@ -10,6 +10,9 @@
         public string Overview { get;  set; } = string.Empty;
 
         public List<string> Genres { get; set; } = new();
+        public string GenresFormatted { get; set; } = string.Empty;
+        public string MPARating { get;  set; }
+        public string Runtime { get;  set; }
     }
 
     public class MovieViewModel2
@@ -31,7 +34,9 @@
 
         public string? TrailerYoutubeKey { get; set; } // only for YouTube trailers
 
-     
+        public List<string> Writers { get; set; } = new();
+
+
 
 
     }

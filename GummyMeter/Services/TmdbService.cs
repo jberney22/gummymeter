@@ -31,6 +31,50 @@ namespace GummyMeter.Services
             return JsonSerializer.Deserialize<JsonElement>(content);
         }
 
+        public async Task<string> GetUsMpaaRatingAsync(int movieId)
+        {
+            // 1) Fetch the JSON  
+            var response = await _httpClient
+                .GetAsync($"https://api.themoviedb.org/3/movie/{movieId}/release_dates?api_key={_apiKey}");
+            response.EnsureSuccessStatusCode();
+            var content = await response.Content.ReadAsStringAsync();
+
+            // 2) Parse into a JsonElement  
+            var root = JsonSerializer.Deserialize<JsonElement>(content);
+
+            // 3) Drill into "results" → pick the US block  
+            if (root.TryGetProperty("results", out var results) &&
+                results.ValueKind == JsonValueKind.Array)
+            {
+                var usEntry = results
+                    .EnumerateArray()
+                    .FirstOrDefault(r =>
+                        string.Equals(
+                            r.GetProperty("iso_3166_1").GetString(),
+                            "US",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    );
+
+                if (usEntry.ValueKind != JsonValueKind.Undefined &&
+                    usEntry.TryGetProperty("release_dates", out var rdates) &&
+                    rdates.ValueKind == JsonValueKind.Array)
+                {
+                    // 4) Scan for the first non-empty "certification"  
+                    foreach (var rd in rdates.EnumerateArray())
+                    {
+                        var cert = rd.GetProperty("certification").GetString();
+                        if (!string.IsNullOrWhiteSpace(cert))
+                            return cert;
+                    }
+                }
+            }
+
+            // 5) Fallback  
+            return "None";
+        }
+
+
 
 
         public async Task<JsonElement> GetMovieDetailsAsync(int id)

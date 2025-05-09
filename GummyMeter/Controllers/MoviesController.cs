@@ -230,18 +230,29 @@ namespace GummyMeter.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
+            string? trailerKey = "";
             var movieJson = await _tmdbService.GetMovieDetailsAsync(id);
             var creditsJson = await _tmdbService.GetMovieCreditsAsync(id);
 
             var videosJson = await _tmdbService.GetMovieVideosAsync(id);
 
-            // Get first YouTube trailer
-            var trailerKey = videosJson.GetProperty("results")
+            var _mpaaRating = await _tmdbService.GetUsMpaaRatingAsync(id);
+
+
+
+            if (videosJson.TryGetProperty("results", out JsonElement results)
+                && results.ValueKind == JsonValueKind.Array
+                && results.GetArrayLength() > 0)
+            {
+                // Get first YouTube trailer
+                trailerKey = videosJson.GetProperty("results")
                 .EnumerateArray()
                 .FirstOrDefault(v =>
                     v.TryGetProperty("type", out var type) && type.GetString() == "Trailer" &&
                     v.TryGetProperty("site", out var site) && site.GetString() == "YouTube")
                 .GetProperty("key").GetString();
+            }
+                
 
             if (movieJson.ValueKind == JsonValueKind.Undefined)
             {
@@ -260,9 +271,13 @@ namespace GummyMeter.Controllers
                                     ? genresArray.EnumerateArray()
                                         .Select(g => g.GetProperty("name").GetString() ?? "")
                                         .ToList()
-                                    : new List<string>()
+                                    : new List<string>(),
+                MPARating = _mpaaRating,
+                Runtime = movieJson.GetProperty("runtime").GetInt32().ToString(),
+                
             };
 
+            movie.GenresFormatted = string.Join(",", movie.Genres);
             var reviews = await _context.Reviews
                 .Where(r => r.MovieId == id.ToString())
                 .OrderByDescending(r => r.CreatedAt)
@@ -283,6 +298,14 @@ namespace GummyMeter.Controllers
                 .FirstOrDefault(c => c.TryGetProperty("job", out var job) && job.GetString() == "Director")
                 .GetProperty("name").GetString() ?? "";
 
+            var writers = creditsJson.GetProperty("crew")
+               .EnumerateArray()
+               .Where(c => c.TryGetProperty("department", out var job) && job.GetString() == "Writing")
+               .Select(c => c.GetProperty("name").GetString() ?? "").ToList();
+
+               //.FirstOrDefault(c => c.TryGetProperty("known_for_department", out var job) && job.GetString() == "Writing")
+               // .GetProperty("name").GetString() ?? "";
+
             var viewModel = new MovieDetailViewModel
             {
                 MovieId = id,
@@ -290,7 +313,8 @@ namespace GummyMeter.Controllers
                 Reviews = reviews,
                 Cast = cast,
                 Director = director,
-                TrailerYoutubeKey = trailerKey
+                TrailerYoutubeKey = trailerKey,
+                Writers = writers
             };
 
             return View(viewModel);

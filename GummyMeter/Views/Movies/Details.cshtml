@@ -153,7 +153,21 @@
 											</div>
 											<div class="sb-it">
 												<h6>Writer: </h6>
-												<p><a href="#">Joss Whedon,</a> <a href="#">Stan Lee</a></p>
+
+												@if (Model.Writers != null && Model.Writers.Any())
+												{
+													<p>
+														@* @foreach (var writer in Model.Writers)
+														{
+															<span class="badge bg-secondary me-1">@writer</span>
+														}  *@
+
+														<span class="badge bg-secondary me-1">
+															@string.Join(", ", Model.Writers)</span>
+														
+													</p>
+												}
+												
 											</div>
 											<div class="sb-it">
 												<h6>Stars: </h6>
@@ -172,10 +186,11 @@
 												@if (Model.Movie.Genres != null && Model.Movie.Genres.Any())
 												{
 													<p>
-														@foreach (var genre in Model.Movie.Genres)
+														@* @foreach (var genre in Model.Movie.Genres)
 														{
 															<span class="badge bg-secondary me-1">@genre</span>
-														}
+														} *@
+														<span class="badge bg-secondary me-1">@Model.Movie.GenresFormatted</span>
 													</p>
 												}
 												@* <p>
@@ -184,17 +199,17 @@
 											</div>
 											<div class="sb-it">
 												<h6>Release Date:</h6>
-												<p>May 1, 2015 (U.S.A)</p>
+												<p>@Convert.ToDateTime(@Model.Movie.ReleaseDate).ToString("yyyy") (U.S.A)</p>
 											</div>
 											<div class="sb-it">
 												<h6>Run Time:</h6>
-												<p>141 min</p>
+												<p>@Model.Movie.Runtime min</p>
 											</div>
 											<div class="sb-it">
 												<h6>MMPA Rating:</h6>
-												<p>PG-13</p>
+												<p>@Model.Movie.MPARating</p>
 											</div>
-											<div class="sb-it">
+											@* <div class="sb-it">
 												<h6>Plot Keywords:</h6>
 												<p class="tags">
 													<span class="time"><a href="#">superhero</a></span>
@@ -203,7 +218,7 @@
 													<span class="time"><a href="#">blockbuster</a></span>
 													<span class="time"><a href="#">final battle</a></span>
 												</p>
-											</div>
+											</div> *@
 											<div class="ads">
 												<img src="images/uploads/ads1.png" alt="">
 											</div>
@@ -223,7 +238,7 @@
 											}
 											else
 											{
-												<p><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a> to write a review.</p>
+												<p><a href="#" class="loginLink">Login</a> to write a review.</p>
 											}
 
 										</div>
@@ -307,7 +322,7 @@
 											<div class="cast-it">
 												<div class="cast-left">
 													<h4>JW</h4>
-													<a href="#">Joss Whedon</a>
+													<a href="#">@Model.Director</a>
 												</div>
 												<p>...  Director</p>
 											</div>
