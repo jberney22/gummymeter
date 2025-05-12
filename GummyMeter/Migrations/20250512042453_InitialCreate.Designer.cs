@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GummyMeter.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250427053930_InitialCreate")]
+    [Migration("20250512042453_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -68,16 +68,14 @@ namespace GummyMeter.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("MovieId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ReviewText")
+                    b.Property<string>("MovieId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -85,6 +83,8 @@ namespace GummyMeter.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
                 });
@@ -96,6 +96,10 @@ namespace GummyMeter.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
@@ -118,6 +122,17 @@ namespace GummyMeter.Migrations
                 {
                     b.HasOne("GummyMeter.Models.User", "User")
                         .WithMany("Favorites")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GummyMeter.Models.Review", b =>
+                {
+                    b.HasOne("GummyMeter.Models.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
