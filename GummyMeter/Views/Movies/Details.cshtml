@@ -7,6 +7,21 @@
 	//var movie = ViewBag.Movie;
 }
 <style>
+	#reviewFormContainer input
+	Specificity: (0,1,1) {
+		font-family: 'Nunito', sans-serif;
+		font-size: 12px;
+		color: #abb7c4;
+		font-weight: 300;
+		text-transform: none;
+		background-color: #233a50;
+		border: none;
+		-webkit-border-radius: 3px !important;
+		-moz-border-radius: 3px !important;
+		border-radius: 3px !important;
+		height: 40px;
+	}
+
 	.stars a {
 	display: inline-block;
 	padding-right: 4px;
@@ -23,8 +38,8 @@
 	color: #9e9e9e;
 	}
 
-	span {
-	/* font-size: 0; */
+	.rate-stars {
+	 font-size: 0; 
 	/* trick to remove inline-element's margin */
 	}
 
@@ -318,46 +333,57 @@
 
 									@if (User.Identity.IsAuthenticated)
 									{
-										<p class="stars">
-											@* <label class="myrating">0</label> *@
-											<span>
-												<a class="star-1">1</a>
-												<a class="star-2">2</a>
-												<a class="star-3">3</a>
-												<a class="star-4">4</a>
-												<a class="star-5">5</a>
-											</span>
-										</p>
 
-										<div id="reviewFormContainer" style="margin-top:30px;">
-											<form id="ajaxReviewForm">
-												@Html.AntiForgeryToken()
-												<input type="hidden" name="movieId" value="@Model.MovieId" />
-												<input type="hidden" id="rate" name="rate" value="" />
 
-												<div id="reviewError" class="alert alert-danger d-none" style="display:none;"></div>
-												<div class="mb-3">
+										<div class="col-md-12 col-sm-12 col-xs-12" style="padding-top: 51px;">
+											<div class="form-style-1 user-pro" action="#">
+												<p class="stars">
+													@* <label class="myrating">0</label> *@
+													<span class="rate-stars">
+														<a class="star-1">1</a>
+														<a class="star-2">2</a>
+														<a class="star-3">3</a>
+														<a class="star-4">4</a>
+														<a class="star-5">5</a>
+													</span>
+												</p>
+												<form id="ajaxReviewForm"  class="user">
+													@Html.AntiForgeryToken()
+													<input type="hidden" name="movieId" value="@Model.MovieId" />
+													<input type="hidden" id="rate" name="rate" value="" />
 
-													<input type="text" name="subject"
-													class="form-control"
-													placeholder="Subject Line..."
-													required></input>
-												</div>
-
-												<div class="mb-3">
-													<textarea name="content"
-													class="form-control"
-													rows="3"
-													placeholder="Write your review…"
-													required></textarea>
-												</div>
-
-												<button type="submit" class="redbtn">
-													<span class="spinner-border spinner-border-sm me-1 d-none"></span>
-													Post Review
-												</button>
-											</form>
+													<h4>Submit Review</h4>
+													<div class="row">
+														<div class="col-md-12 form-it">
+															@* <label>Subject</label> *@
+															<input type="text" placeholder="Subject Line...">
+														</div>
+													
+													</div>
+													<div class="row">
+														<div class="col-md-12 form-it">
+															@* <label>First Name</label> *@
+															<textarea style="height: 200px;background-color: #233a50;border: none;font-size: 12px;color: #abb7c4;border-radius: 3px !important;" name="content"
+																	  rows="5"
+																	  placeholder="Write your review…"
+																	  required></textarea>
+														</div>
+														
+													</div>
+												
+													<div class="row">
+														<button type="submit" class="redbtn" style="margin-left:15px;">
+															<span class="spinner-border spinner-border-sm me-1 d-none"></span>
+															Post Review
+														</button>
+													</div>
+												</form>
+												
+											</div>
 										</div>
+
+
+										
 									}
 
 								</div>
@@ -674,6 +700,7 @@
 @section Scripts{
 	<script>
 		$(function(){
+
 		  var $form   = $('#ajaxReviewForm'),
 			  $btn    = $form.find('button[type="submit"]'),
 			  $spin   = $btn.find('.spinner-border'),
@@ -707,12 +734,32 @@
 			  // clear textarea
 			  $form.find('textarea[name="content"]').val('');
 			})
-			.fail(function(xhr){
-				$('#reviewError').show();
-			  var msg = (xhr.responseJSON && xhr.responseJSON.error)
-						? xhr.responseJSON.error
-						: 'An error occurred.';
-			  $error.text(msg).removeClass('d-none');
+			.fail(function(xhr, status, error){
+				var jsonResponse = JSON.parse(xhr.responseText);
+				
+						$.toast({
+							text: jsonResponse["error"], // Text that is to be shown in the toast
+							heading: 'Error', // Optional heading to be shown on the toast
+							icon: 'error', // Type of toast icon
+							showHideTransition: 'fade', // fade, slide or plain
+							allowToastClose: true, // Boolean value true or false
+							hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+							stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+							position: 'bottom-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+
+
+
+							textAlign: 'left',  // Text alignment i.e. left, right or center
+							loader: true,  // Whether to show loader or not. True by default
+							loaderBg: '#9EC600',  // Background color of the toast loader
+
+						});
+
+				// $('#reviewError').show();
+			 //  var msg = (xhr.responseJSON && xhr.responseJSON.error)
+				// 		? xhr.responseJSON.error
+				// 		: 'An error occurred.';
+			 //  $error.text(msg).removeClass('d-none');
 			})
 			.always(function(){
 			  $spin.addClass('d-none');
@@ -726,7 +773,7 @@
 
 			$(this).addClass('active');
 			$('.stars span').addClass('active');
-			alert($(this).text());
+			//alert($(this).text());
 			//$('.myrating').html($(this).text());
 			$('#rate').val($(this).text())
 		});

@@ -196,6 +196,7 @@ $(function(){
 		slidesToShow: 4,
 		slidesToScroll: 4,
 		arrows: false,
+		
 		draggable:true,
 		autoplay: true,
 		autoplaySpeed: 2000,

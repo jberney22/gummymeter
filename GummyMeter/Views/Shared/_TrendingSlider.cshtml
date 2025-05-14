@@ -15,24 +15,28 @@
                 <a href="#"><i class="ion-social-youtube"></i></a>
             </div>
             <h2 style="color:white;">What's trending</h2>
-            <div class="slick-multiItemSlider">
+            <div class="slick-multiItemSlider" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-centered--y rounded-circle"
+                 data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4"
+                 data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4">
                 @foreach (var movie in Model.TrendingMovies)
                 {
                     <div class="movie-item">
+                        <a href="/Movies/Details/@movie.Id">
                         <div class="mv-img">
-                            <a href="/Movies/Details/@movie.Id">
+                          
                                 <img src="@(movie.PosterPath != null ? $"https://image.tmdb.org/t/p/w500/{movie.PosterPath}" : "https://via.placeholder.com/285x437?text=No+Image")" width="285" height="437" class="card-img-top" alt="@movie.Title" loading="lazy" />
                                 @* <img src="images/uploads/slider1.jpg" alt="" width="285" height="437"> *@
-                            </a>
+                           
                         </div>
+                        </a>
                         <div class="title-in">
                             <div class="cate">
-                                <span class="blue"><a href="#">Sci-fi</a></span>
+                               @*  <span class="blue"><a href="#">Sci-fi</a></span> *@
                             </div>
-                            <h6><a href="/Movies/Details/@movie.Id">@movie.Title</a></h6>
-                            <p>
+                            @* <h6><a href="/Movies/Details/@movie.Id">@movie.Title</a></h6> *@
+                          @*   <p>
                                 <i class="ion-android-star"></i><span>@movie.VoteAverage</span> /10
-                            </p>
+                            </p> *@
                         </div>
                     </div>
                 }
