@@ -35,10 +35,10 @@
         public string? TrailerYoutubeKey { get; set; } // only for YouTube trailers
 
         public List<string> Writers { get; set; } = new();
-
-
-
-
+        public List<Rating> Ratings { get; internal set; }
+        public double Avg { get; internal set; }
+        public int? UserRating { get;  set; }
+        public List<CastMember> Producers { get; internal set; }
     }
 
     public class CastMember

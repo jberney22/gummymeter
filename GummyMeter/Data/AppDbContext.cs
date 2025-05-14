@@ -12,6 +12,7 @@ namespace GummyMeter.Data
         public DbSet<User> Users => Set<User>();
         public DbSet<Favorite> Favorites => Set<Favorite>();
         public DbSet<Review> Reviews => Set<Review>();
+        public DbSet<Rating> Ratings { get; set; }
     }
 
 }

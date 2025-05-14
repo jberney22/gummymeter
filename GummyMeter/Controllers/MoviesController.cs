@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
+using System.Security.Claims;
 using System.Text.Json;
 
 namespace GummyMeter.Controllers
@@ -198,35 +199,92 @@ namespace GummyMeter.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> AddReview(int id, string content)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddReviewAjax(int movieId, string content, string subject, int rate)
         {
             var username = User.Identity?.Name;
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
             if (user == null) return Unauthorized();
 
-            var movieId = id.ToString();
+            //var movieIdStr = movieId.ToString();
+
+            // validate
+            if (string.IsNullOrWhiteSpace(content))
+                return BadRequest(new { error = "Review cannot be empty." });
+
 
             // Only allow 1 review per user per movie
             var existingReview = await _context.Reviews
-                .FirstOrDefaultAsync(r => r.UserId == user.Id && r.MovieId == movieId);
+                .FirstOrDefaultAsync(r => r.UserId == user.Id && r.MovieId == movieId.ToString());
             if (existingReview != null)
             {
-                return RedirectToAction("Details", new { id });
+                return BadRequest(new { error = "You’ve already reviewed this movie." });
             }
 
             var review = new Review
             {
                 UserId = user.Id,
-                MovieId = movieId,
+                MovieId = movieId.ToString(),
                 Content = content,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                Subject = subject
+                
             };
 
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Details", new { id });
+            var temp = await RateMovieAjax(movieId, rate);
+
+
+            // return RedirectToAction("Details", new { id = movieId });
+            // return the new review data
+            return Ok(new
+            {
+                username = user.Username,
+                content = review.Content,
+                createdAt = review.CreatedAt.ToLocalTime().ToString("g")
+            });
         }
+
+       
+        private async Task<IActionResult> RateMovieAjax(int movieId, int score)
+        {
+            if (score < 1 || score > 5)
+                return BadRequest("Invalid score");
+
+            var uid = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var existing = await _context.Ratings
+                .FirstOrDefaultAsync(r => r.MovieId == movieId && r.UserId == uid);
+
+            if (existing != null)
+            {
+                existing.Score = score;
+                existing.CreatedAt = DateTime.UtcNow;
+            }
+            else
+            {
+                _context.Ratings.Add(new Rating
+                {
+                    MovieId = movieId,
+                    UserId = uid,
+                    Score = score
+                });
+            }
+            await _context.SaveChangesAsync();
+
+            // recompute average
+            var avg = await _context.Ratings
+                .Where(r => r.MovieId == movieId)
+                .AverageAsync(r => r.Score);
+
+            return Ok(new
+            {
+                average = Math.Round(avg, 2),
+                userScore = score
+            });
+        }
+
 
         public async Task<IActionResult> Details(int id)
         {
@@ -280,6 +338,7 @@ namespace GummyMeter.Controllers
             movie.GenresFormatted = string.Join(",", movie.Genres);
             var reviews = await _context.Reviews
                 .Where(r => r.MovieId == id.ToString())
+                .Include(r => r.User)
                 .OrderByDescending(r => r.CreatedAt)
                 .ToListAsync();
 
@@ -298,13 +357,43 @@ namespace GummyMeter.Controllers
                 .FirstOrDefault(c => c.TryGetProperty("job", out var job) && job.GetString() == "Director")
                 .GetProperty("name").GetString() ?? "";
 
+            var directorProfilePath = creditsJson.GetProperty("crew")
+                .EnumerateArray()
+                .FirstOrDefault(c => c.TryGetProperty("job", out var job) && job.GetString() == "Director")
+                .GetProperty("profile_path").GetString() ?? "";
+
             var writers = creditsJson.GetProperty("crew")
                .EnumerateArray()
                .Where(c => c.TryGetProperty("department", out var job) && job.GetString() == "Writing")
-               .Select(c => c.GetProperty("name").GetString() ?? "").ToList();
+               .Select(c => c.GetProperty("name").GetString() ?? "").Distinct().ToList();
 
-               //.FirstOrDefault(c => c.TryGetProperty("known_for_department", out var job) && job.GetString() == "Writing")
-               // .GetProperty("name").GetString() ?? "";
+            var producers = creditsJson.GetProperty("crew")
+               .EnumerateArray()
+                .Where(c => c.TryGetProperty("department", out var job) && job.GetString() == "Production")
+               .Select(c => new CastMember
+               {
+                   Name = c.GetProperty("name").GetString() ?? "",
+                   //Character = c.GetProperty("character").GetString() ?? "",
+                   ProfilePath = c.TryGetProperty("profile_path", out var profile) ? profile.GetString() : null
+               }).ToList();
+
+
+            // 1) compute average
+            var ratings = await _context.Ratings
+                .Where(r => r.MovieId == id)
+                .ToListAsync();
+
+            var avg = ratings.Any()
+                ? ratings.Average(r => r.Score)
+                : 0;
+
+            // 2) find current user’s rating if signed in
+            int? userScore = null;
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                var uid = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                userScore = ratings.FirstOrDefault(r => r.UserId == uid)?.Score;
+            }
 
             var viewModel = new MovieDetailViewModel
             {
@@ -314,11 +403,17 @@ namespace GummyMeter.Controllers
                 Cast = cast,
                 Director = director,
                 TrailerYoutubeKey = trailerKey,
-                Writers = writers
+                Writers = writers,
+                Ratings = ratings,
+                Avg = avg,
+                UserRating = userScore,
+                Producers = producers
             };
 
             return View(viewModel);
         }
+
+
 
 
     }

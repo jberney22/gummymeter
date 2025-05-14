@@ -4841,7 +4841,7 @@ ul {
   padding-left: 15px;
 }
 .tabs .tab-content .active {
-  margin-left: -15px;
+  /*margin-left: -15px;*/
 }
 .trailers {
   background-color: #06121e;
@@ -7855,11 +7855,12 @@ header .navbar-default .navbar-nav li a {
 header .navbar-default .navbar-nav li a:hover {
   color: #dcf836;
 }
-header .navbar-default .navbar-nav li a i {
-  float: right;
-  right: 0;
-  margin-top: 3px;
-}
+    header .navbar-default .navbar-nav li a i {
+        float: right;
+        right: 0;
+        margin-top: 0.313rem;
+        margin-left: 0.313rem;
+    }
 header .navbar-default .navbar-nav li.btn a {
   background-color: #dd003f;
   color: #ffffff;

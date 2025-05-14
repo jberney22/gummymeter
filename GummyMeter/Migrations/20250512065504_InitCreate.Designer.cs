@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GummyMeter.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250512042453_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250512065504_InitCreate")]
+    partial class InitCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,6 +77,9 @@ namespace GummyMeter.Migrations
 
                     b.Property<string>("MovieId")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Subject")
                         .HasColumnType("text");
 
                     b.Property<int>("UserId")
