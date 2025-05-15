@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
+using System.Linq;
 using System.Security.Claims;
 using System.Text.Json;
 
@@ -164,6 +165,40 @@ namespace GummyMeter.Controllers
 
         public IActionResult Search() => View();
 
+
+        [HttpGet("/Movies/Category/{category}")]
+        public async Task<IActionResult> Category(string category, int page = 1)
+        {
+            JsonElement json;
+            try
+            {
+                json = await _tmdbService.GetMoviesByCategoryAsync(category, page);
+            }
+            catch (ArgumentException)
+            {
+                return NotFound(); // unknown category
+            }
+
+            var movies = ParseMovies(json);
+            var movieIds = movies.Select(m => m.Id).ToList();
+            var counts = await _context.Reviews
+               .Where(r => movieIds.Contains(Convert.ToInt32(r.MovieId)))
+               .GroupBy(r => r.MovieId)
+               .Select(g => new { MovieId = g.Key, Count = g.Count() })
+               .ToListAsync();
+
+            // 4) Assign each movie’s ReviewCount (0 if none)
+            foreach (var m in movies)
+                m.ReviewCount = counts
+                    .FirstOrDefault(c => int.Parse(c.MovieId) == m.Id)?.Count ?? 0;
+
+            ViewBag.Category = category;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = json.GetProperty("total_pages").GetInt32();
+            return View(movies);
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> Search(string query, int page = 1)
         {
@@ -189,6 +224,20 @@ namespace GummyMeter.Controllers
                     VoteAverage = m.GetProperty("vote_average").GetDouble()
                 })
                 .ToList();
+
+            var movieIds = movies.Select(m => m.Id).ToList();
+            var counts = await _context.Reviews
+               .Where(r => movieIds.Contains(Convert.ToInt32(r.MovieId)))
+               .GroupBy(r => r.MovieId)
+               .Select(g => new { MovieId = g.Key, Count = g.Count() })
+               .ToListAsync();
+
+            // 4) Assign each movie’s ReviewCount (0 if none)
+            foreach (var m in movies)
+                m.ReviewCount = counts
+                    .FirstOrDefault(c => int.Parse(c.MovieId) == m.Id)?.Count ?? 0;
+
+
 
             ViewBag.SearchQuery = query;
             ViewBag.CurrentPage = page;
@@ -234,7 +283,7 @@ namespace GummyMeter.Controllers
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
-            var temp = await RateMovieAjax(movieId, rate);
+            await RateMovieAjax(movieId, rate);
 
 
             // return RedirectToAction("Details", new { id = movieId });

@@ -13,6 +13,7 @@
         public string GenresFormatted { get; set; } = string.Empty;
         public string MPARating { get;  set; }
         public string Runtime { get;  set; }
+        public int? ReviewCount { get;  set; }
     }
 
     public class MovieViewModel2

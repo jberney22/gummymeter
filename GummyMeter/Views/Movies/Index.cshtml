@@ -4,13 +4,6 @@
 	@model GummyMeter.Models.MovieViewModel2
 }
 
-@* <div class="text-center mb-4">
-    <button class="btn btn-primary m-1" onclick="loadCategory('GetTrending')">Trending</button>
-    <button class="btn btn-primary m-1" onclick="loadCategory('GetTopRated')">Top Rated</button>
-    <button class="btn btn-primary m-1" onclick="loadCategory('GetPopular')">Popular</button>
-    <button class="btn btn-primary m-1" onclick="loadCategory('GetNowPlaying')">Now Playing</button>
-    <button class="btn btn-primary m-1" onclick="loadCategory('GetUpcoming')">Upcoming</button>
-</div> *@
 
 <div id="sliderContainer">
     @await Html.PartialAsync("_TrendingSlider", Model)
@@ -23,15 +16,9 @@
 			<div class="col-md-8">
 				<div class="title-hd">
 					<h2>Popular Movies</h2>
-					<a href="#" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+					<a href="/Movies/Category/popular" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
 				</div>
 				<div class="tabs">
-					@* <ul class="tab-links">
-						<li class="active"><a href="#tab1">#Popular</a></li>
-						<li><a href="#tab2"> #Coming soon</a></li>
-						<li><a href="#tab3">  #Top rated  </a></li>
-						<li><a href="#tab4"> #Now Playing</a></li>
-					</ul> *@
 					<div class="tab-content">
 						<div id="tab1" class="tab active">
 							<div class="row">
@@ -39,37 +26,14 @@
 								@await Html.PartialAsync("_MovieCategories", Model.PopularMovies.Take(10).ToList())
 							</div>
 						</div>
-						@* <div id="tab2" class="tab">
-							<div class="row">
-								@await Html.PartialAsync("_MovieCategories", Model.UpcomingMovies)
-							</div>
-						</div>
-						<div id="tab3" class="tab">
-							<div class="row">
-								@await Html.PartialAsync("_MovieCategories", Model.TopRatedMovies)
-
-							</div>
-						</div>
-						<div id="tab4" class="tab">
-							<div class="row">
-								@await Html.PartialAsync("_MovieCategories", Model.NowPlayingMovies)
-
-							</div>
-						</div> *@
 					</div>
 				</div>
 
 				<div class="title-hd">
 					<h2>Upcoming Movies</h2>
-					<a href="#" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+					<a href="/Movies/Category/upcoming" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
 				</div>
 				<div class="tabs">
-					@* <ul class="tab-links">
-						<li class="active"><a href="#tab1">#Popular</a></li>
-						<li><a href="#tab2"> #Coming soon</a></li>
-						<li><a href="#tab3">  #Top rated  </a></li>
-						<li><a href="#tab4"> #Now Playing</a></li>
-					</ul> *@
 					<div class="tab-content">
 						<div id="tab1" class="tab active">
 							<div class="row">
@@ -77,23 +41,21 @@
 								@await Html.PartialAsync("_MovieCategories", Model.UpcomingMovies.Take(10).ToList())
 							</div>
 						</div>
-						@* <div id="tab2" class="tab">
+					</div>
+				</div>
+
+				<div class="title-hd">
+					<h2>Top Rated Movies</h2>
+					<a href="/Movies/Category/toprated" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+				</div>
+				<div class="tabs">
+					<div class="tab-content">
+						<div id="tab1" class="tab active">
 							<div class="row">
-								@await Html.PartialAsync("_MovieCategories", Model.UpcomingMovies)
+								<!-- add partial view -->
+								@await Html.PartialAsync("_MovieCategories", Model.TopRatedMovies.Take(10).ToList())
 							</div>
 						</div>
-						<div id="tab3" class="tab">
-							<div class="row">
-								@await Html.PartialAsync("_MovieCategories", Model.TopRatedMovies)
-
-							</div>
-						</div>
-						<div id="tab4" class="tab">
-							<div class="row">
-								@await Html.PartialAsync("_MovieCategories", Model.NowPlayingMovies)
-
-							</div>
-						</div> *@
 					</div>
 				</div>
 
@@ -106,9 +68,9 @@
 					<div class="ads">
 						<img src="images/uploads/ads1.png" alt="" width="336" height="296">
 					</div>
-				@* 	<div class="ads">
+				 	<div class="ads">
 						<img src="images/uploads/ads1.png" alt="" width="336" height="296">
-					</div> *@
+					</div> 
 					
 					
 

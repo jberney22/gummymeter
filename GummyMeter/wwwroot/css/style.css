@@ -4661,6 +4661,7 @@ ul {
   color: #ffffff;
   font-weight: bold;
   text-transform: uppercase;
+  padding-left:14px;
 }
 @media (max-width: 767px) {
   .title-hd h2 {

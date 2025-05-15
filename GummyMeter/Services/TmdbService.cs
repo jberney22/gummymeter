@@ -135,6 +135,36 @@ namespace GummyMeter.Services
         }
 
 
+        public async Task<JsonElement> DiscoverMoviesAsync(int page = 1)
+        {
+            var url = $"https://api.themoviedb.org/3/discover/movie?api_key={_apiKey}&page={page}";
+            var response = await _httpClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<JsonElement>(content);
+        }
+
+        // Services/TmdbService.cs
+        public async Task<JsonElement> GetMoviesByCategoryAsync(string category, int page = 1)
+        {
+            // map your category names to TMDB endpoints
+            string endpoint = category.ToLower() switch
+            {
+                "trending" => $"trending/movie/day",
+                "toprated" => $"movie/top_rated",
+                "popular" => $"movie/popular",
+                "nowplaying" => $"movie/now_playing",
+                "upcoming" => $"movie/upcoming",
+                _ => throw new ArgumentException("Unknown category", nameof(category))
+            };
+
+            var url = $"https://api.themoviedb.org/3/{endpoint}?api_key={_apiKey}&page={page}";
+            var response = await _httpClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<JsonElement>(content);
+        }
+
 
     }
 }

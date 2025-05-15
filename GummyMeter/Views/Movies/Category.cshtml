@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<GummyMeter.Models.MovieViewModel>
 
 @{
-    ViewData["Title"] = "Search";
+	var cat = ViewBag.Category as string ?? "";
+	var title = char.ToUpper(cat[0]) + cat.Substring(1);
+	ViewData["Title"] = title;
 }
 
 <div class="hero common-hero">
@@ -9,10 +11,10 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="hero-ct">
-					<h2 style="color:white;">Search Results for "@ViewBag.SearchQuery"</h2>
+					<h1>@cat Movies</h1>
 					<ul class="breadcumb">
-						<li class="active"><a href="#">Home</a></li>
-						<li> <span class="ion-ios-arrow-right"></span> movie listing</li>
+						<li class="active"><a href="/">Home</a></li>
+						<li> <span class="ion-ios-arrow-right"></span> Category <span class="ion-ios-arrow-right"></span> @cat</li>
 					</ul>
 				</div>
 			</div>
@@ -22,14 +24,14 @@
 <div class="page-single">
 	<div class="container">
 		<div class="row ipad-width">
-		
+
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="topbar-filter">
-					
+
 					@if (ViewBag.TotalResults != null)
 					{
 						<p>Found <span>@ViewBag.TotalResults movies</span> in total</p>
-						
+
 					}
 					<label>Sort by:</label>
 					<select>
@@ -45,9 +47,8 @@
 				</div>
 				<div class="flex-wrap-movielist">
 					<!-- Insert forloop-->
-
-
-					@foreach (var item in Model) {
+					@foreach (var item in Model)
+					{
 						<div class="movie-item-style-2 movie-item-style-1">
 							<img src="@(item.PosterPath != null ? $"https://image.tmdb.org/t/p/w500/{item.PosterPath}" : "https://eticketsolutions.com/demo/themes/e-ticket/img/movie.jpg")" class="card-img-top" alt="@item.Title" loading="lazy" />
 							<div class="hvr-inner">
@@ -65,8 +66,8 @@
 						<p>No movies found matching "@ViewBag.SearchQuery".</p>
 					}
 				</div>
-				<div  style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-					
+				<div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+
 
 					@if (ViewBag.TotalPages > 1)
 					{
@@ -82,14 +83,17 @@
 								@for (int i = 1; i <= (int)ViewBag.TotalPages && i <= 10; i++) // Show up to 10 pages
 								{
 									<li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-										<a class="page-link" href="/Movies/Search?query=@ViewBag.SearchQuery&page=@i">@i</a>
+										<a class="page-link"
+										   asp-action="Category"
+										   asp-route-category="@cat"
+										   asp-route-page="@i">@i</a>
 									</li>
 								}
 
 								@if (ViewBag.CurrentPage < ViewBag.TotalPages)
 								{
 									<li class="page-item">
-										<a class="page-link" href="/Movies/Search?query=@ViewBag.SearchQuery&page=@(ViewBag.CurrentPage + 1)"><i class="fa-solid fa-chevron-right"></i></a>
+										<a class="page-link" asp-action="Category" asp-route-category="@cat" asp-route-page="@(ViewBag.CurrentPage + 1)"><i class="fa-solid fa-chevron-right"></i></a>
 									</li>
 								}
 							</ul>
@@ -111,12 +115,10 @@
 
 			</div>
 
-			
+
 			</<div>
+			</div>
 
 		</div>
-
 	</div>
 </div>
-</div>
- 
