@@ -40,6 +40,8 @@
         public double Avg { get; internal set; }
         public int? UserRating { get;  set; }
         public List<CastMember> Producers { get; internal set; }
+        public double Tomatometer { get;  set; }
+        public double Popcornmeter { get;  set; }
     }
 
     public class CastMember

@@ -346,6 +346,22 @@ namespace GummyMeter.Controllers
             var _mpaaRating = await _tmdbService.GetUsMpaaRatingAsync(id);
 
 
+            var reviews = await _context.Reviews
+                .Where(r => r.MovieId == id.ToString())
+                .Include(r => r.User)
+                .OrderByDescending(r => r.CreatedAt)
+                .ToListAsync();
+
+            var criticReviews = reviews.Where(r => r.IsCritic).ToList();
+            var audienceReviews = reviews.Where(r => !r.IsCritic).ToList();
+
+            double tomatometer = criticReviews.Any()
+               ? criticReviews.Count(r => r.Score >= 3) * 100.0 / criticReviews.Count
+               : 0;
+
+            double popcornmeter = audienceReviews.Any()
+                ? audienceReviews.Count(r => r.Score >= 3) * 100.0 / audienceReviews.Count
+                : 0;
 
             if (videosJson.TryGetProperty("results", out JsonElement results)
                 && results.ValueKind == JsonValueKind.Array
@@ -385,11 +401,7 @@ namespace GummyMeter.Controllers
             };
 
             movie.GenresFormatted = string.Join(",", movie.Genres);
-            var reviews = await _context.Reviews
-                .Where(r => r.MovieId == id.ToString())
-                .Include(r => r.User)
-                .OrderByDescending(r => r.CreatedAt)
-                .ToListAsync();
+        
 
             var cast = creditsJson.GetProperty("cast")
                 .EnumerateArray()
@@ -456,7 +468,9 @@ namespace GummyMeter.Controllers
                 Ratings = ratings,
                 Avg = avg,
                 UserRating = userScore,
-                Producers = producers
+                Producers = producers,
+                Tomatometer = tomatometer,
+                Popcornmeter = popcornmeter,
             };
 
             return View(viewModel);

@@ -7,60 +7,14 @@
 	//var movie = ViewBag.Movie;
 }
 <style>
-	#reviewFormContainer input
-	Specificity: (0,1,1) {
-		font-family: 'Nunito', sans-serif;
-		font-size: 12px;
-		color: #abb7c4;
-		font-weight: 300;
-		text-transform: none;
-		background-color: #233a50;
-		border: none;
-		-webkit-border-radius: 3px !important;
-		-moz-border-radius: 3px !important;
-		border-radius: 3px !important;
-		height: 40px;
+	.meter{
+		color:#fff;
+		text-align:center;
+		
 	}
 
-	.stars a {
-	display: inline-block;
-	padding-right: 4px;
-	text-decoration: none;
-	margin: 0;
-	}
-
-	.stars a:after {
-	position: relative;
-	font-size: 18px;
-	font-family: 'FontAwesome', serif;
-	display: block;
-	content: "\f005";
-	color: #9e9e9e;
-	}
-
-	.rate-stars {
-	 font-size: 0; 
-	/* trick to remove inline-element's margin */
-	}
-
-	.stars a:hover ~ a:after {
-	color: #9e9e9e !important;
-	}
-
-	span.active a.active ~ a:after {
-	color: #9e9e9e;
-	}
-
-	span:hover a:after {
-	color: blue !important;
-	}
-
-	span.active a:after,
-	.stars a.active:after {
-	color: blue;
-	}
 </style>
-
+<div class="buster-light">
 <div class="hero mv-single-hero">
 	<div class="container">
 		<div class="row">
@@ -133,19 +87,31 @@
 								</i>
 							}
 
-							@* <i class="ion-ios-star"></i>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star"></i>
-							<i class="ion-ios-star-outline"></i> *@
-						</div>
 
+							
+							
+						</div>
+						
 
 					</div>
+					<div style="display:flex;border-bottom: 1px solid #405266;">
+						<!-- Tomatometer -->
+						<div class="meter">
+							<div class="meter-circle meter-tomato" style="--pct:@Model.Tomatometer;margin-left: 15px;">
+								<span style="font-size:large">@Model.Tomatometer%</span>
+							</div>
+							<div class="meter-label">Gummy Score</div>
+						</div>
+
+						<!-- Popcornmeter -->
+						<div style="color:#fff; text-align:center; padding-left:3rem;">
+							<div class="meter-circle meter-popcorn" style="--pct:@Model.Popcornmeter; margin-left: 15px;">
+								<span style="font-size:large">@Model.Popcornmeter%</span>
+							</div>
+							<div class="meter-label">Audience Score</div>
+						</div>
+				    </div>
+					
 					<div class="movie-tabs">
 						<div class="tabs">
 							<ul class="tab-links tabs-mv">
@@ -696,7 +662,7 @@
 		</div>
 	</div>
 </div>
-
+</div>
 @section Scripts{
 	<script>
 		$(function(){
