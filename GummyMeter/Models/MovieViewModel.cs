@@ -14,6 +14,9 @@
         public string MPARating { get;  set; }
         public string Runtime { get;  set; }
         public int? ReviewCount { get;  set; }
+
+        public int FakeTomatometer { get; set; }
+        public int FakePopcornmeter { get; set; }
     }
 
     public class MovieViewModel2

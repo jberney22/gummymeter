@@ -16,6 +16,7 @@ namespace GummyMeter.Controllers
     {
         private readonly AppDbContext _context;
         private readonly TmdbService _tmdbService;
+        private static readonly Random _rng = new();
 
         public MoviesController(AppDbContext context, TmdbService tmdbService)
         {
@@ -92,7 +93,8 @@ namespace GummyMeter.Controllers
                     Id = m.GetProperty("id").GetInt32(),
                     Title = m.GetProperty("title").GetString() ?? "Untitled",
                     PosterPath = m.TryGetProperty("poster_path", out var poster) ? poster.GetString() : null,
-                    VoteAverage = m.GetProperty("vote_average").GetDouble()
+                    FakeTomatometer = new Random().Next(0, 101),
+                    FakePopcornmeter = new Random().Next(0, 101)
                 })
                 .ToList();
 
@@ -106,7 +108,9 @@ namespace GummyMeter.Controllers
                     Id = m.GetProperty("id").GetInt32(),
                     Title = m.GetProperty("title").GetString() ?? "Untitled",
                     PosterPath = m.TryGetProperty("poster_path", out var poster) ? poster.GetString() : null,
-                    VoteAverage = m.GetProperty("vote_average").GetDouble()
+                    VoteAverage = m.GetProperty("vote_average").GetDouble(),
+                    FakeTomatometer = new Random().Next(0, 101),
+                    FakePopcornmeter = new Random().Next(0, 101)
                 })
                 .ToList();
 
@@ -120,7 +124,9 @@ namespace GummyMeter.Controllers
                     Id = m.GetProperty("id").GetInt32(),
                     Title = m.GetProperty("title").GetString() ?? "Untitled",
                     PosterPath = m.TryGetProperty("poster_path", out var poster) ? poster.GetString() : null,
-                    VoteAverage = m.GetProperty("vote_average").GetDouble()
+                    VoteAverage = m.GetProperty("vote_average").GetDouble(),
+                    FakeTomatometer = new Random().Next(0, 101),
+                    FakePopcornmeter = new Random().Next(0, 101)
                 })
                 .ToList();
 
@@ -134,7 +140,9 @@ namespace GummyMeter.Controllers
                     Id = m.GetProperty("id").GetInt32(),
                     Title = m.GetProperty("title").GetString() ?? "Untitled",
                     PosterPath = m.TryGetProperty("poster_path", out var poster) ? poster.GetString() : null,
-                    VoteAverage = m.GetProperty("vote_average").GetDouble()
+                    VoteAverage = m.GetProperty("vote_average").GetDouble(),
+                    FakeTomatometer = new Random().Next(0, 101),
+                    FakePopcornmeter = new Random().Next(0, 101)
                 })
                 .ToList();
 
@@ -149,7 +157,9 @@ namespace GummyMeter.Controllers
                     Id = m.GetProperty("id").GetInt32(),
                     Title = m.GetProperty("title").GetString() ?? "Untitled",
                     PosterPath = m.TryGetProperty("poster_path", out var poster) ? poster.GetString() : null,
-                    VoteAverage = m.GetProperty("vote_average").GetDouble()
+                    VoteAverage = m.GetProperty("vote_average").GetDouble(),
+                    FakeTomatometer = new Random().Next(0, 101),
+                    FakePopcornmeter = new Random().Next(0, 101)
                 })
                 .ToList();
 

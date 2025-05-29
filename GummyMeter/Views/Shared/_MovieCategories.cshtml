@@ -4,12 +4,14 @@
 @foreach (var movie in Model)
 {
     <div class="movie-item">
-        <div class="mv-img">
             <a href="/Movies/Details/@movie.Id">
+        <div class="mv-img">
+           
                 <img src="@(movie.PosterPath != null ? $"https://image.tmdb.org/t/p/w500/{movie.PosterPath}" : "https://via.placeholder.com/285x437?text=No+Image")" width="285" height="437" class="card-img-top" alt="@movie.Title" loading="lazy" />
                 @* <img src="images/uploads/slider1.jpg" alt="" width="285" height="437"> *@
-            </a>
+           
         </div>
+            </a>
      @*    <div class="title-in">
             <div class="cate">
             </div>
@@ -23,7 +25,7 @@
                         <div class="meter-circle meter-tomato">
                         <img src="~/images/uploads/juicy.png" height="25" width="25" style="width:100%" />
                         <div style=" margin-top: 20px;">
-                            <span style="font-size:medium">34%</span>
+                            <span style="font-size:medium">@movie.FakeTomatometer %</span>
                             <span style="font-size:small"> Gummy</span>
                         </div>
                            
@@ -34,7 +36,7 @@
                 <div class="meter" style="text-align: center;vertical-align: middle;">
                         <div class="meter-circle meter-tomato">
                         <img src="~/images/uploads/sticky.png" height="25" width="25" style="width:100%"  />
-                            <span style="font-size:medium">56% <br/> splat</span><br/>
+                        <span style="font-size:medium">@movie.FakePopcornmeter % <br /> splat</span><br />
                   
                         </div>
                         @*   <div class="meter-label">Gummy Score</div> *@
