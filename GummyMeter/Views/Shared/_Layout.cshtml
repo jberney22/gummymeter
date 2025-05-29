@@ -34,7 +34,7 @@
 <body>
 	<!--preloading-->
 	<div id="preloader">
-		<img class="logo" src="~/images/gummylogo.png" alt="" width="75" height="58">
+		<img class="logo" src="~/images/uploads/new_logo.png" alt="" width="75" height="58">
 		<div id="status">
 			<span></span>
 			<span></span>
@@ -94,7 +94,9 @@
 			</div>
 		</div>
 		<!--end of signup form popup-->
-
+	<div style="background-color:black">
+		<img src="~/images/uploads/oscars_new.jpg" height="100" style="display:block; margin:auto;width:50%" />
+	</div>
 	<!-- BEGIN | Header -->
 	<header class="ht-header">
 		<div class="container">
@@ -109,10 +111,11 @@
 							<span></span>
 						</div>
 					</div>
-					<a href="/"><img class="logo" src="~/images/gummylogo.png" alt="" width="75" height="58"></a>
+					<a href="/"><img class="logo" src="~/images/uploads/new_logo.png" alt="" width="75" height="58"></a>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+					
 					<ul class="nav navbar-nav flex-child-menu menu-left">
 						<li class="hidden">
 							<a href="#page-top"></a>
@@ -192,9 +195,10 @@
 					
 					</ul>
 				</div>
+				
 				<!-- /.navbar-collapse -->
 			</nav>
-
+			
 			<!-- top search form -->
 			<form class="d-flex" asp-controller="Movies" asp-action="Search" method="get">
 				<div class="top-search">
@@ -215,7 +219,9 @@
 	</header>
 	<!-- END | Header -->
 
-   
+	@* <div>
+		<img src="~/images/uploads/oscars_new.jpg" width="275" height="100"  />
+	</div> *@
 
 	@RenderBody()
    
@@ -224,7 +230,7 @@
 		<div class="container">
 			<div class="flex-parent-ft">
 				<div class="flex-child-ft item1">
-					<a href="/"><img class="logo" src="~/images/gummylogo.png" alt="" width="75" height="75"></a>
+					<a href="/"><img class="logo" src="~/images/uploads/new_logo.png" alt="" width="75" height="75"></a>
 					<p>
 						5th Avenue st, manhattan<br>
 						New York, NY 10001

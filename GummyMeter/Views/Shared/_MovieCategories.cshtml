@@ -10,16 +10,40 @@
                 @* <img src="images/uploads/slider1.jpg" alt="" width="285" height="437"> *@
             </a>
         </div>
-        <div class="title-in">
+     @*    <div class="title-in">
             <div class="cate">
-               @*  <span class="blue"><a href="#">Sci-fi</a></span> *@
             </div>
             <h6><a href="/Movies/Details/@movie.Id">@movie.Title</a></h6>
-           @*  <p>
-                <i class="ion-android-star"></i><span>@movie.VoteAverage</span> /10
-            </p> *@
-        </div>
+         
+        </div> *@
+
+            <div style="display:flex;text-align: center;vertical-align: middle;">
+                    <!-- Tomatometer -->
+                <div class="meter" style="text-align: center;vertical-align: middle;">
+                        <div class="meter-circle meter-tomato">
+                        <img src="~/images/uploads/juicy.png" height="25" width="25" style="width:100%" />
+                        <div style=" margin-top: 20px;">
+                            <span style="font-size:medium">34%</span>
+                            <span style="font-size:small"> Gummy</span>
+                        </div>
+                           
+                        </div>
+                        @*   <div class="meter-label">Gummy Score</div> *@
+                    </div>
+
+                <div class="meter" style="text-align: center;vertical-align: middle;">
+                        <div class="meter-circle meter-tomato">
+                        <img src="~/images/uploads/sticky.png" height="25" width="25" style="width:100%"  />
+                            <span style="font-size:medium">56% <br/> splat</span><br/>
+                  
+                        </div>
+                        @*   <div class="meter-label">Gummy Score</div> *@
+                    </div>
+
+            
+                </div>
     </div>
+        
 }
 </div>
 
