@@ -5,45 +5,46 @@
 {
     <div class="movie-item">
             <a href="/Movies/Details/@movie.Id">
-        <div class="mv-img">
+                <div class="mv-img">
            
-                <img src="@(movie.PosterPath != null ? $"https://image.tmdb.org/t/p/w500/{movie.PosterPath}" : "https://via.placeholder.com/285x437?text=No+Image")" width="285" height="437" class="card-img-top" alt="@movie.Title" loading="lazy" />
-                @* <img src="images/uploads/slider1.jpg" alt="" width="285" height="437"> *@
+                        <img src="@(movie.PosterPath != null ? $"https://image.tmdb.org/t/p/w500/{movie.PosterPath}" : "https://via.placeholder.com/285x437?text=No+Image")" width="285" height="437" class="card-img-top" alt="@movie.Title" loading="lazy" />
+                        @* <img src="images/uploads/slider1.jpg" alt="" width="285" height="437"> *@
            
-        </div>
+                </div>
             </a>
+            
      @*    <div class="title-in">
             <div class="cate">
             </div>
             <h6><a href="/Movies/Details/@movie.Id">@movie.Title</a></h6>
          
         </div> *@
-
-            <div style="display:flex;text-align: center;vertical-align: middle;">
-                    <!-- Tomatometer -->
-                <div class="meter" style="text-align: center;vertical-align: middle;">
-                        <div class="meter-circle meter-tomato">
-                        <img src="~/images/uploads/juicy.png" height="25" width="25" style="width:100%" />
-                        <div style=" margin-top: 20px;">
-                            <span style="font-size:medium">@movie.FakeTomatometer %</span>
-                            <span style="font-size:small"> Gummy</span>
+            <div style="padding-bottom: 3rem;">
+                <div class="row gy-4">
+                    <!-- Column 1 -->
+                    <div class="col-12 col-md-6 col-fixed d-flex flex-column justify-content-between">
+                        <img src="~/images/uploads/juicy.png" alt="Image 1 description">
+                        <div class="text-center">
+                            <h5>@movie.FakeTomatometer%</h5>
+                            <span style="font-size: 12px;font-family: fontFranklinGothic;"> Gummy</span>
                         </div>
-                           
-                        </div>
-                        @*   <div class="meter-label">Gummy Score</div> *@
                     </div>
 
-                <div class="meter" style="text-align: center;vertical-align: middle;">
-                        <div class="meter-circle meter-tomato">
-                        <img src="~/images/uploads/sticky.png" height="25" width="25" style="width:100%"  />
-                        <span style="font-size:medium">@movie.FakePopcornmeter % <br /> splat</span><br />
-                  
+                    <!-- Column 2 -->
+                    <div class="col-12 col-md-6 col-fixed d-flex flex-column justify-content-between">
+                        <img src="~/images/uploads/sticky.png" alt="Image 2 description">
+                        <div class="text-center">
+                            <h5>@movie.FakePopcornmeter%</h5>
+                            <span style="font-size: 12px;font-family: fontFranklinGothic;"> Splat</span>
                         </div>
-                        @*   <div class="meter-label">Gummy Score</div> *@
                     </div>
+                </div>
+            </div>
 
             
-                </div>
+
+          
+
     </div>
         
 }
