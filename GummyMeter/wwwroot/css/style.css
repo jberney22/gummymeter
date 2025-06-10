@@ -31,6 +31,11 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
+
+:root {
+    font-size: 16px;
+}
+
 @media print {
     *,
     *:before,
@@ -998,10 +1003,6 @@
     .col-lg-offset-0 {
         margin-left: 0%;
     }
-}
-
-.small-text {
-    font: 400 12px/1.25 'Nunito', sans-serif;
 }
 
 table {
@@ -5395,6 +5396,33 @@ ul {
 
 .movie-items .slick-slider {
     margin-left: 15px;
+}
+
+.movie-items .movie-item .ratings .ratings-info .ratings-img {
+    display: block;
+    width: 75px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.movie-items .movie-item .ratings .ratings-info {
+    display: inline-block;
+    margin: .5rem 0;
+    padding: 0;
+}
+
+.movie-items .movie-item .ratings .ratings-info.gummy {
+    float: right;
+}
+
+.movie-items .movie-item .ratings .ratings-info.splat {
+    float: left;
+}
+
+.movie-items .movie-item .ratings .ratings-info .small-text {
+    display: block;
+    font: 400 12px/1.25 'Nunito', sans-serif;
 }
 
 .topbar-filter {

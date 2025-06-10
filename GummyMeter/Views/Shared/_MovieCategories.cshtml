@@ -1,52 +1,39 @@
 ﻿@model List<GummyMeter.Models.MovieViewModel>
 
 <div class="slick-multiItemSlider">
-@foreach (var movie in Model)
-{
-    <div class="movie-item">
+    @foreach (var movie in Model)
+    {
+        <div class="movie-item">
             <a href="/Movies/Details/@movie.Id">
                 <div class="mv-img">
-           
-                        <img src="@(movie.PosterPath != null ? $"https://image.tmdb.org/t/p/w500/{movie.PosterPath}" : "https://via.placeholder.com/285x437?text=No+Image")" width="285" height="437" class="card-img-top" alt="@movie.Title" loading="lazy" />
-                        @* <img src="images/uploads/slider1.jpg" alt="" width="285" height="437"> *@
-           
+
+                    <img src="@(movie.PosterPath != null ? $"https://image.tmdb.org/t/p/w500/{movie.PosterPath}" : "https://via.placeholder.com/285x437?text=No+Image")" width="285" height="437" class="card-img-top" alt="@movie.Title" loading="lazy" />
+                    @* <img src="images/uploads/slider1.jpg" alt="" width="285" height="437"> *@
+
                 </div>
             </a>
-            
-     @*    <div class="title-in">
-            <div class="cate">
-            </div>
-            <h6><a href="/Movies/Details/@movie.Id">@movie.Title</a></h6>
-         
-        </div> *@
-            <div style="padding-bottom: 3rem;">
+            <div class="ratings">
                 <div class="row gy-4">
-                    <!-- Column 1 -->
-                    <div class="col-12 col-md-6 col-fixed d-flex flex-column justify-content-between">
-                        <img src="~/images/uploads/juicy.png" alt="Image 1 description">
-                        <div class="text-center">
-                            <h5>@movie.FakeTomatometer%</h5>
-                            <span style="font-size: 12px;font-family: fontFranklinGothic;"> Gummy</span>
+                    <div class="col-xs-6 align-self-end">
+                        <div class="ratings-info gummy">
+                            <img class="ratings-img" src="~/images/uploads/juicy.png" alt="juicy rating">
+                            <div class="text-center">
+                                <h5>@movie.FakeTomatometer%</h5>
+                                <span class="small-text">Gummy</span>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Column 2 -->
-                    <div class="col-12 col-md-6 col-fixed d-flex flex-column justify-content-between">
-                        <img src="~/images/uploads/sticky.png" alt="Image 2 description">
-                        <div class="text-center">
-                            <h5>@movie.FakePopcornmeter%</h5>
-                            <span style="font-size: 12px;font-family: fontFranklinGothic;"> Splat</span>
+                    <div class="col-xs-6 align-self-start">
+                        <div class="ratings-info splat">
+                            <img class="ratings-img" src="~/images/uploads/sticky.png" alt="sticky mess rating">
+                            <div class="text-center">
+                                <h5>@movie.FakePopcornmeter%</h5>
+                                <span class="small-text">Splat</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            
-
-          
-
-    </div>
-        
-}
-</div>
-
+    }
