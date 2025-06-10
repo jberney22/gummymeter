@@ -407,7 +407,9 @@ namespace GummyMeter.Controllers
                                     : new List<string>(),
                 MPARating = _mpaaRating,
                 Runtime = movieJson.GetProperty("runtime").GetInt32().ToString(),
-                
+                FakeTomatometer = new Random().Next(0, 101),
+                FakePopcornmeter = new Random().Next(0, 101)
+
             };
 
             movie.GenresFormatted = string.Join(",", movie.Genres);
