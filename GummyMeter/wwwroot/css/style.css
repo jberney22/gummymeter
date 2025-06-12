@@ -6025,11 +6025,20 @@ ul {
 
 .ads {
     margin-bottom: 60px;
+    text-align: center;
 }
 
-    .ads img {
-        width: 100%;
-    }
+.ads .ads-logo {
+    display: block;
+    width: 120px;
+    height: auto;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.ads .ads-logo.regal {
+    width: 200px;
+}
 
 .adsv2 {
     display: -webkit-flex;
@@ -8456,7 +8465,7 @@ p.ceb-single {
 
     @media (min-width: 768px) {
         .slider .social-link {
-            margin-top: 1.5rem;
+            margin-top: .5rem;
         } 
     }
 
@@ -9417,6 +9426,11 @@ header .navbar-default .navbar-nav {
         border-radius: 20px;
     }
 
+    header .navbar-default .navbar-nav li.btn a:hover {
+        opacity: 0.8;
+        transition: opacity 500ms ease;
+    }
+
     header .navbar-default .navbar-nav .dropdown .dropdown-menu.level1 {
         position: absolute;
         min-width: 180px;
@@ -9512,6 +9526,22 @@ header .top-search {
     header .top-search input {
         /*background: url('../images/uploads/topsearch.png') no-repeat right 20px center;*/
     }
+
+header .top-search .btn-search {
+    padding: .75rem 1rem;
+    background-color: #dd003f;
+    border: 0;
+    color: #fff;
+    font: bold 1rem/1.25 'Dosis', sans-serif;
+    text-transform: uppercase;
+}
+
+header .top-search .btn-search:hover {
+    opacity: 0.8;
+    transition: opacity 500ms ease;
+    cursor: pointer;
+}
+
 
 header #nav-icon1 {
     width: 15px;
@@ -9772,10 +9802,13 @@ footer .flex-parent-ft .flex-child-ft p {
     margin-bottom: 15px;
 }
 
-    footer .flex-parent-ft .flex-child-ft p a {
-        color: #ffffff;
-        font-size: 18px;
-    }
+footer .flex-parent-ft .flex-child-ft p a {
+    color: #fff;
+}
+
+footer .flex-parent-ft .flex-child-ft p a:hover {
+    color: #dcf836;
+}
 
 footer .flex-parent-ft .flex-child-ft h4 {
     font-family: 'Dosis', sans-serif;
