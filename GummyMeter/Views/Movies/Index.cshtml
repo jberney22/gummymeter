@@ -1,89 +1,85 @@
 ﻿@{
-    ViewData["Title"] = "Trending Movies";
-    //@model List<GummyMeter.Models.MovieViewModel>
+	ViewData["Title"] = "Trending Movies";
+	//@model List<GummyMeter.Models.MovieViewModel>
 	@model GummyMeter.Models.MovieViewModel2
 }
 
-
 <div id="sliderContainer">
-    @await Html.PartialAsync("_TrendingSlider", Model)
+	@await Html.PartialAsync("_TrendingSlider", Model)
 </div>
 
 <div class="buster-light">
-<div class="movie-items">
-	<div class="container">
-		<div class="row ipad-width">
-			
-			<div class="col-md-8">
-				<div class="title-hd">
-					<h2>Popular Movies</h2>
-					<a href="/Movies/Category/popular" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
-				</div>
-				<div class="tabs">
-					<div class="tab-content">
-						<div id="tab1" class="tab active">
-							<div class="row">
-								<!-- add partial view -->
-								@await Html.PartialAsync("_MovieCategories", Model.PopularMovies.Take(10).ToList())
+	<div class="movie-items">
+		<div class="container">
+			<div class="row ipad-width">
+				<div class="col-md-8">
+					<div class="title-hd">
+						<h2>Popular Movies</h2>
+						<a href="/Movies/Category/popular" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+					</div>
+					<div class="tabs">
+						<div class="tab-content">
+							<div id="tab1" class="tab active">
+								<div class="row">
+									@if (Model?.PopularMovies is not null)
+									{
+										@await Html.PartialAsync("_MovieCategories", Model?.PopularMovies.Take(10).ToList())
+									}
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="title-hd">
+						<h2>Upcoming Movies</h2>
+						<a href="/Movies/Category/upcoming" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+					</div>
+					<div class="tabs">
+						<div class="tab-content">
+							<div id="tab1" class="tab active">
+								<div class="row">
+									@if (Model?.UpcomingMovies is not null)
+									{
+										@await Html.PartialAsync("_MovieCategories", Model?.UpcomingMovies.Take(10).ToList())
+									}
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="title-hd">
+						<h2>Top Rated Movies</h2>
+						<a href="/Movies/Category/toprated" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+					</div>
+					<div class="tabs">
+						<div class="tab-content">
+							<div id="tab1" class="tab active">
+								<div class="row">
+									@if (Model?.TopRatedMovies is not null)
+									{
+										@await Html.PartialAsync("_MovieCategories", Model?.TopRatedMovies.Take(10).ToList())
+									}
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<div class="title-hd">
-					<h2>Upcoming Movies</h2>
-					<a href="/Movies/Category/upcoming" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
-				</div>
-				<div class="tabs">
-					<div class="tab-content">
-						<div id="tab1" class="tab active">
-							<div class="row">
-								<!-- add partial view -->
-								@await Html.PartialAsync("_MovieCategories", Model.UpcomingMovies.Take(10).ToList())
-							</div>
+				<div class="col-md-4">
+					<div class="sidebar">
+						<div class="ads">
+							<img class="ads-logo amc" src="/images/logo-amc.svg" alt="AMC logo">
+						</div>
+						<div class="ads">
+							<img class="ads-logo regal" src="/images/logo-regal.svg" alt="Regal logo">
+						</div>
+						<div class="ads">
+							<img class="ads-logo oscar" src="/images/logo-oscar.svg" alt="Oscar logo">
 						</div>
 					</div>
 				</div>
-
-				<div class="title-hd">
-					<h2>Top Rated Movies</h2>
-					<a href="/Movies/Category/toprated" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
-				</div>
-				<div class="tabs">
-					<div class="tab-content">
-						<div id="tab1" class="tab active">
-							<div class="row">
-								<!-- add partial view -->
-								@await Html.PartialAsync("_MovieCategories", Model.TopRatedMovies.Take(10).ToList())
-							</div>
-						</div>
-					</div>
-				</div>
-
 			</div>
-			<div class="col-md-4">
-				<div class="sidebar">
-					<div class="ads">
-							<img src="images/amc@logotyp.us.png" alt="" width="336" height="296">
-					</div>
-					<div class="ads">
-							<img src="images/Regal_Cinemas_Logo.png" alt="" width="336" height="296">
-					</div>
-				 	<div class="ads">
-							<img src="images/oscars.jpg" alt="" width="336" height="296">
-					</div> 
-					
-					
-
-					
-				</div>
-			</div>
-
 		</div>
-		
 	</div>
-</div>
-
 </div>
 
 @section Scripts {
@@ -103,7 +99,7 @@
 			// 	  }
 			// 	});
 
-			console.log('Loading category: ' + action); 
+			console.log('Loading category: ' + action);
 			fetch(`/Movies/${action}`)
 				.then(response => {
 					if (!response.ok) throw new Error('Fetch failed');
@@ -112,13 +108,9 @@
 				.then(html => {
 					 $("#sliderContainer1").html(html);
 					document.getElementById('sliderContainer1').innerHTML = html;
-					rebindSliderStuff(); 
+					rebindSliderStuff();
 				})
 				.catch(error => console.error('Fetch error:', error));
 		}
-
-		
 	</script>
-
-
 }
