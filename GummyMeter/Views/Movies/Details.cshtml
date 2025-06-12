@@ -94,26 +94,27 @@
 						
 
 					</div>
-					<div style="display:flex;border-bottom: 1px solid #405266;">
-						<!-- Tomatometer -->
-						<div class="meter">
-							<div class="meter-circle meter-tomato" style="--pct:@Model.Tomatometer;margin-left: 15px;">
-                                <img src="~/images/uploads/juicy.png" alt="Juicy Rating" height="50" width="50" />
-								<span style="font-size:large">@Model.Tomatometer%</span>
-							</div>
-							<div class="meter-label">Gummy Score</div>
-						</div>
-
-						<!-- Popcornmeter -->
-						<div style="color:#fff; text-align:center; padding-left:3rem;">
-							<div class="meter-circle meter-popcorn" style="--pct:@Model.Popcornmeter; margin-left: 15px;">
-									<img src="~/images/uploads/sticky.png" height="50" width="50" />
-								<span style="font-size:large">@Model.Popcornmeter%</span>
-							</div>
-							<div class="meter-label">Audience Score</div>
-						</div>
-				    </div>
-					
+			
+					<div class="row gy-4">
+                    <div class="col-xs-6 align-self-end">
+                        <div class="ratings-info gummy">
+                            <img class="ratings-img" src="~/images/uploads/juicy.png" alt="juicy rating">
+                            <div class="text-center">
+                                <h5>@Model.Movie.FakeTomatometer%</h5>
+                                <span class="small-text">Gummy</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 align-self-start">
+                        <div class="ratings-info splat">
+                            <img class="ratings-img" src="~/images/uploads/sticky.png" alt="sticky mess rating">
+                            <div class="text-center">
+                                <h5>@Model.Movie.FakePopcornmeter%</h5>
+                                <span class="small-text">Splat</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 					<div class="movie-tabs" style="margin-top:2rem;">
 						<div class="tabs">
 							<ul class="tab-links tabs-mv">
