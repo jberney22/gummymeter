@@ -541,7 +541,7 @@ $(function(){
 		    var scrollTop = $(window).scrollTop();
 		            
 		    if (sidebarTop < scrollTop) {
-		      stickySidebar.css('top', scrollTop - sidebarTop+ 80);
+		      stickySidebar.css('top', scrollTop - sidebarTop+ 105);
 
 		      // stop the sticky sidebar at the footer to avoid overlapping
 		      var sidebarBottom = stickySidebar.offset().top + stickyHeight,
