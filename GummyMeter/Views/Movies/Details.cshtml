@@ -34,7 +34,7 @@
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="movie-img sticky-sb">
 					<img src="https://image.tmdb.org/t/p/w500/@Model.Movie.PosterPath" class="card-img-top" alt="@Model.Movie.Title"/>
-					@* <img src="images/uploads/movie-single.jpg" alt=""> overview *@
+					@* <img src="/images/uploads/movie-single.jpg" alt=""> overview *@
 					<div class="movie-btn">
 						<div class="btn-transform transform-vertical red">
 							<div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Watch Trailer</a></div>
@@ -86,17 +86,11 @@
 								aria-label="@($"Rate {i} stars")">
 								</i>
 							}
-
-
-							
-							
 						</div>
-						
-
 					</div>
-			
-					<div class="row gy-4">
-                    <div class="col-xs-6 align-self-end">
+					<div class="ratings details">
+						<div class="row gy-4">
+                    <div class="col-xs-4 col-xs-offset-1 col-md-2 col-md-offset-0 align-self-end">
                         <div class="ratings-info gummy">
                             <img class="ratings-img" src="~/images/uploads/juicy.png" alt="juicy rating">
                             <div class="text-center">
@@ -105,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-6 align-self-start">
+                    <div class="col-xs-4 col-xs-offset-1 col-md-2 col-md-offset-0 align-self-start">
                         <div class="ratings-info splat">
                             <img class="ratings-img" src="~/images/uploads/sticky.png" alt="sticky mess rating">
                             <div class="text-center">
@@ -115,6 +109,7 @@
                         </div>
                     </div>
                 </div>
+					</div>
 					<div class="movie-tabs" style="margin-top:2rem;">
 						<div class="tabs">
 							<ul class="tab-links tabs-mv">
@@ -134,12 +129,12 @@
 												<a href="#" class="time">All 5 Videos & 245 Photos <i class="ion-ios-arrow-right"></i></a>
 											</div>
 											<div class="mvsingle-item ov-item">
-												<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image11.jpg"><img src="images/uploads/image1.jpg" alt=""></a>
-												<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image21.jpg"><img src="images/uploads/image2.jpg" alt=""></a>
-												<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image31.jpg"><img src="images/uploads/image3.jpg" alt=""></a>
+												<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image11.jpg"><img src="/images/uploads/image1.jpg" alt=""></a>
+												<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image21.jpg"><img src="/images/uploads/image2.jpg" alt=""></a>
+												<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image31.jpg"><img src="/images/uploads/image3.jpg" alt=""></a>
 												<div class="vd-it">
-													<img class="vd-img" src="images/uploads/image4.jpg" alt="">
-													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="images/uploads/play-vd.png" alt=""></a>
+													<img class="vd-img" src="/images/uploads/image4.jpg" alt="">
+													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="/images/uploads/play-vd.png" alt=""></a>
 												</div>
 											</div>
 											<div class="title-hd-sm">
@@ -150,35 +145,27 @@
 											<div class="mvcast-item">
 												@foreach (var actor in Model.Cast.Take(10)) // Show first 10 actors
 												{
-													<div class="cast-it">
-														<div class="cast-left">
-															@* @if (actor.TryGetProperty("profile_path", out JsonElement profile) && profile.GetString() != null) *@
-															@* { *@
-															@* 	<img height="50" width="50" src="https://image.tmdb.org/t/p/w185/@profile.GetString()" loading="lazy" class="card-img-top" alt="@actor.GetProperty("name").GetString()" /> *@
-															@* } *@
-
+													<div class="cast">
+														<div class="cast-photo">
 															@{
 																string profilePath = actor.ProfilePath != null
 																? $"https://image.tmdb.org/t/p/w185/{actor.ProfilePath}"
 																: "https://adaptcommunitynetwork.org/wp-content/uploads/2023/09/person-placeholder.jpg";
 															}
-
-															<img src="@profilePath" height="75" width="75" loading="lazy" class="card-img-top" alt="@actor.Name"  />
-
-
-															@* 	<img loading="lazy" src="https://image.tmdb.org/t/p/w185/@actor.GetProperty("profile_path")" class="card-img-top" alt="@actor.GetProperty("name").GetString()" /> *@
-
-															<a href="#">@actor.Name</a>
+															<img src="@profilePath" height="75" width="75" loading="lazy" class="card-img-top" alt="@actor.Name" />
 														</div>
-														<p>as @actor.Character</p>
+														<div class="cast-info">
+															<div class="cast-info-name">
+																<a href="#">@actor.Name</a>
+															</div>
+															<div class="cast-info-character">
+																<p>as @actor.Character</p>
+															</div>
+														</div>
 													</div>
 												}
-
-
 											</div>
-
 											<!-- movie user review -->
-
 
 										</div>
 										<div class="col-md-4 col-xs-12 col-sm-12">
@@ -255,7 +242,7 @@
 												</p>
 											</div> *@
 											<div class="ads">
-												<img src="images/uploads/ads1.png" alt="">
+												<img src="/images/uploads/ads1.png" alt="">
 											</div>
 										</div>
 									</div>
@@ -376,24 +363,19 @@
 										<div class="title-hd-sm">
 											<h4>Credit Writers</h4>
 										</div>
-										<div class="mvcast-item">
-
-											@foreach(var writers in Model.Writers)
-											{
-
-												<div class="cast-it">
-													<div class="cast-left">
-														<h4>@writers.GetInitials()</h4>
+										@foreach (var writers in Model.Writers)
+										{
+											<div class="cast">
+												<div class="cast-initials">
+													<h4>@writers.GetInitials()</h4>
+												</div>
+												<div class="cast-info">
+													<div class="cast-info-name">
 														<a>@writers</a>
 													</div>
-
 												</div>
-
-											}
-
-
-
-										</div>
+											</div>
+										}
 										<!-- //== -->
 										<div class="title-hd-sm">
 											<h4>Cast</h4>
@@ -401,28 +383,25 @@
 										<div class="mvcast-item">
 											@foreach (var actor in Model.Cast) // Show first 10 actors
 											{
-												<div class="cast-it">
-													<div class="cast-left">
-														@* @if (actor.TryGetProperty("profile_path", out JsonElement profile) && profile.GetString() != null) *@
-														@* { *@
-														@* 	<img height="50" width="50" src="https://image.tmdb.org/t/p/w185/@profile.GetString()" loading="lazy" class="card-img-top" alt="@actor.GetProperty("name").GetString()" /> *@
-														@* } *@
-
+												<div class="cast">
+													<div class="cast-photo">
 														@{
 															string profilePath = actor.ProfilePath != null
 															? $"https://image.tmdb.org/t/p/w185/{actor.ProfilePath}"
 															: "https://adaptcommunitynetwork.org/wp-content/uploads/2023/09/person-placeholder.jpg";
 														}
-
 														<img src="@profilePath" height="75" width="75" loading="lazy" class="card-img-top" alt="@actor.Name" />
-
-														<a href="#">@actor.Name</a>
 													</div>
-													<p>as @actor.Character</p>
+													<div class="cast-info">
+														<div class="cast-info-name">
+															<a href="#">@actor.Name</a>
+														</div>
+														<div class="cast-info-character">
+															<p>as @actor.Character</p>
+														</div>
+													</div>
 												</div>
 											}
-
-
 										</div>
 										<!-- //== -->
 										<div class="title-hd-sm">
@@ -464,8 +443,8 @@
 										<div class="mvsingle-item media-item">
 											<div class="vd-item">
 												<div class="vd-it">
-													<img class="vd-img" src="images/uploads/vd-item1.jpg" alt="">
-													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="images/uploads/play-vd.png" alt=""></a>
+													<img class="vd-img" src="/images/uploads/vd-item1.jpg" alt="">
+													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="/images/uploads/play-vd.png" alt=""></a>
 												</div>
 												<div class="vd-infor">
 													<h6> <a href="#">Trailer:  Watch New Scenes</a></h6>
@@ -474,8 +453,8 @@
 											</div>
 											<div class="vd-item">
 												<div class="vd-it">
-													<img class="vd-img" src="images/uploads/vd-item2.jpg" alt="">
-													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="images/uploads/play-vd.png" alt=""></a>
+													<img class="vd-img" src="/images/uploads/vd-item2.jpg" alt="">
+													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="/images/uploads/play-vd.png" alt=""></a>
 												</div>
 												<div class="vd-infor">
 													<h6> <a href="#">Featurette: “Avengers Re-Assembled</a></h6>
@@ -484,8 +463,8 @@
 											</div>
 											<div class="vd-item">
 												<div class="vd-it">
-													<img class="vd-img" src="images/uploads/vd-item3.jpg" alt="">
-													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="images/uploads/play-vd.png" alt=""></a>
+													<img class="vd-img" src="/images/uploads/vd-item3.jpg" alt="">
+													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="/images/uploads/play-vd.png" alt=""></a>
 												</div>
 												<div class="vd-infor">
 													<h6> <a href="#">Interview: Robert Downey Jr</a></h6>
@@ -494,8 +473,8 @@
 											</div>
 											<div class="vd-item">
 												<div class="vd-it">
-													<img class="vd-img" src="images/uploads/vd-item4.jpg" alt="">
-													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="images/uploads/play-vd.png" alt=""></a>
+													<img class="vd-img" src="/images/uploads/vd-item4.jpg" alt="">
+													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="/images/uploads/play-vd.png" alt=""></a>
 												</div>
 												<div class="vd-infor">
 													<h6> <a href="#">Interview: Scarlett Johansson</a></h6>
@@ -504,8 +483,8 @@
 											</div>
 											<div class="vd-item">
 												<div class="vd-it">
-													<img class="vd-img" src="images/uploads/vd-item1.jpg" alt="">
-													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="images/uploads/play-vd.png" alt=""></a>
+													<img class="vd-img" src="/images/uploads/vd-item1.jpg" alt="">
+													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="/images/uploads/play-vd.png" alt=""></a>
 												</div>
 												<div class="vd-infor">
 													<h6> <a href="#">Featurette: Meet Quicksilver & The Scarlet Witch</a></h6>
@@ -514,8 +493,8 @@
 											</div>
 											<div class="vd-item">
 												<div class="vd-it">
-													<img class="vd-img" src="images/uploads/vd-item2.jpg" alt="">
-													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="images/uploads/play-vd.png" alt=""></a>
+													<img class="vd-img" src="/images/uploads/vd-item2.jpg" alt="">
+													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="/images/uploads/play-vd.png" alt=""></a>
 												</div>
 												<div class="vd-infor">
 													<h6> <a href="#">Interview: Director Joss Whedon</a></h6>
@@ -524,8 +503,8 @@
 											</div>
 											<div class="vd-item">
 												<div class="vd-it">
-													<img class="vd-img" src="images/uploads/vd-item3.jpg" alt="">
-													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="images/uploads/play-vd.png" alt=""></a>
+													<img class="vd-img" src="/images/uploads/vd-item3.jpg" alt="">
+													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="/images/uploads/play-vd.png" alt=""></a>
 												</div>
 												<div class="vd-infor">
 													<h6> <a href="#">Interview: Mark Ruffalo</a></h6>
@@ -534,8 +513,8 @@
 											</div>
 											<div class="vd-item">
 												<div class="vd-it">
-													<img class="vd-img" src="images/uploads/vd-item4.jpg" alt="">
-													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="images/uploads/play-vd.png" alt=""></a>
+													<img class="vd-img" src="/images/uploads/vd-item4.jpg" alt="">
+													<a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0"><img src="/images/uploads/play-vd.png" alt=""></a>
 												</div>
 												<div class="vd-infor">
 													<h6> <a href="#">Official Trailer #2</a></h6>
@@ -547,48 +526,50 @@
 											<h4>Photos <span> (21)</span></h4>
 										</div>
 										<div class="mvsingle-item">
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image11.jpg"><img src="images/uploads/image1.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image21.jpg"><img src="images/uploads/image2.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image31.jpg"><img src="images/uploads/image3.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image41.jpg"><img src="images/uploads/image4.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image51.jpg"><img src="images/uploads/image5.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image61.jpg"><img src="images/uploads/image6.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image71.jpg"><img src="images/uploads/image7.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image81.jpg"><img src="images/uploads/image8.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image91.jpg"><img src="images/uploads/image9.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image101.jpg"><img src="images/uploads/image10.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image111.jpg"><img src="images/uploads/image1-1.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image121.jpg"><img src="images/uploads/image12.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image131.jpg"><img src="images/uploads/image13.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image141.jpg"><img src="images/uploads/image14.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image151.jpg"><img src="images/uploads/image15.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image161.jpg"><img src="images/uploads/image16.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image171.jpg"><img src="images/uploads/image17.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image181.jpg"><img src="images/uploads/image18.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image191.jpg"><img src="images/uploads/image19.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image201.jpg"><img src="images/uploads/image20.jpg" alt=""></a>
-											<a class="img-lightbox" data-fancybox-group="gallery" href="images/uploads/image211.jpg"><img src="images/uploads/image2-1.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image11.jpg"><img src="/images/uploads/image1.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image21.jpg"><img src="/images/uploads/image2.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image31.jpg"><img src="/images/uploads/image3.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image41.jpg"><img src="/images/uploads/image4.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image51.jpg"><img src="/images/uploads/image5.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image61.jpg"><img src="/images/uploads/image6.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image71.jpg"><img src="/images/uploads/image7.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image81.jpg"><img src="/images/uploads/image8.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image91.jpg"><img src="/images/uploads/image9.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image101.jpg"><img src="/images/uploads/image10.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image111.jpg"><img src="/images/uploads/image1-1.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image121.jpg"><img src="/images/uploads/image12.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image131.jpg"><img src="/images/uploads/image13.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image141.jpg"><img src="/images/uploads/image14.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image151.jpg"><img src="/images/uploads/image15.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image161.jpg"><img src="/images/uploads/image16.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image171.jpg"><img src="/images/uploads/image17.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image181.jpg"><img src="/images/uploads/image18.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image191.jpg"><img src="/images/uploads/image19.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image201.jpg"><img src="/images/uploads/image20.jpg" alt=""></a>
+											<a class="img-lightbox" data-fancybox-group="gallery" href="/images/uploads/image211.jpg"><img src="/images/uploads/image2-1.jpg" alt=""></a>
 										</div>
 									</div>
 								</div>
 								<div id="moviesrelated" class="tab">
 									<div class="row">
-										<h3>Related Movies To</h3>
+										<h3>Related Movies to</h3>
 										<h2>Skyfall: Quantum of Spectre</h2>
 										<div class="topbar-filter">
-											<p>Found <span>12 movies</span> in total</p>
-											<label>Sort by:</label>
-											<select>
-												<option value="popularity">Popularity Descending</option>
-												<option value="popularity">Popularity Ascending</option>
-												<option value="rating">Rating Descending</option>
-												<option value="rating">Rating Ascending</option>
-												<option value="date">Release date Descending</option>
-												<option value="date">Release date Ascending</option>
-											</select>
+											<div class="found-items">Found <span>12 movies</span> in total</div>
+											<div class="filters">
+												<label for="sort">Sort by:</label>
+												<select name="sort">
+													<option value="popularity">Popularity Descending</option>
+													<option value="popularity">Popularity Ascending</option>
+													<option value="rating">Rating Descending</option>
+													<option value="rating">Rating Ascending</option>
+													<option value="date">Release date Descending</option>
+													<option value="date">Release date Ascending</option>
+												</select>
+											</div>
 										</div>
 										<div class="movie-item-style-2">
-											<img src="images/uploads/mv1.jpg" alt="">
+											<img src="/images/uploads/mv1.jpg" alt="">
 											<div class="mv-item-infor">
 												<h6><a href="#">oblivion <span>(2012)</span></a></h6>
 												<p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
@@ -599,7 +580,7 @@
 											</div>
 										</div>
 										<div class="movie-item-style-2">
-											<img src="images/uploads/mv2.jpg" alt="">
+											<img src="/images/uploads/mv2.jpg" alt="">
 											<div class="mv-item-infor">
 												<h6><a href="#">into the wild <span>(2014)</span></a></h6>
 												<p class="rate"><i class="ion-android-star"></i><span>7.8</span> /10</p>
@@ -610,7 +591,7 @@
 											</div>
 										</div>
 										<div class="movie-item-style-2">
-											<img src="images/uploads/mv3.jpg" alt="">
+											<img src="/images/uploads/mv3.jpg" alt="">
 											<div class="mv-item-infor">
 												<h6><a href="#">blade runner  <span>(2015)</span></a></h6>
 												<p class="rate"><i class="ion-android-star"></i><span>7.3</span> /10</p>
@@ -621,7 +602,7 @@
 											</div>
 										</div>
 										<div class="movie-item-style-2">
-											<img src="images/uploads/mv4.jpg" alt="">
+											<img src="/images/uploads/mv4.jpg" alt="">
 											<div class="mv-item-infor">
 												<h6><a href="#">Mulholland pride<span> (2013)  </span></a></h6>
 												<p class="rate"><i class="ion-android-star"></i><span>7.2</span> /10</p>
@@ -632,7 +613,7 @@
 											</div>
 										</div>
 										<div class="movie-item-style-2">
-											<img src="images/uploads/mv5.jpg" alt="">
+											<img src="/images/uploads/mv5.jpg" alt="">
 											<div class="mv-item-infor">
 												<h6><a href="#">skyfall: evil of boss<span> (2013)  </span></a></h6>
 												<p class="rate"><i class="ion-android-star"></i><span>7.0</span> /10</p>
@@ -748,13 +729,3 @@
 		});
 	</script>
 }
-
-
-
-
-
-
-
-
-
-
