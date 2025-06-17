@@ -347,6 +347,11 @@ namespace GummyMeter.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
+            if (id == 0)
+                return null;
+
+
+
             string? trailerKey = "";
             var movieJson = await _tmdbService.GetMovieDetailsAsync(id);
             var creditsJson = await _tmdbService.GetMovieCreditsAsync(id);
