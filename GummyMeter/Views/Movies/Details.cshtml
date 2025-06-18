@@ -7,6 +7,85 @@
 	//var movie = ViewBag.Movie;
 }
 <style>
+	
+	.slick-slide > div {
+		margin: 0 10px;
+	}
+	.review-card {
+		/* width: 255px; */
+		font-family: Arial, sans-serif;
+		border: 1px solid #ddd;
+		border-radius: 8px;
+		padding: 16px;
+		box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+		background: #f3f3f3;
+	}
+
+	.review-header {
+		display: flex;
+		align-items: center;
+		margin-bottom: 12px;
+	}
+
+	.avatar {
+		width: 48px !important;
+		height: 48px !important;
+		border-radius: 50% !important;
+		margin-right: 12px !important;
+	}
+
+	.critic-name {
+		font-weight: bold;
+		font-size: 14px;
+	}
+
+	.top-critic {
+		color: red;
+		font-weight: bold;
+		font-size: 11px;
+	}
+
+	.critic-role {
+		font-size: 10px;
+		color: #666;
+	}
+
+	.review-body {
+		font-size: 14px;
+		color: #333;
+		margin-bottom: 16px;
+	}
+
+	.review-body > p {
+			font-size: 12px !important;
+			line-height: 19px !important;
+			letter-spacing:0;
+		color: #333;
+		font-size: 0.875rem;
+		font-family: "Franklin Gothic", -apple-system, BlinkMacSystemFont, "PT Sans", Arial, sans-serif;
+		
+	}
+
+	.review-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 13px;
+		color: #444;
+	}
+
+	.tomato-icon {
+		width: 12% !important;
+	/* 	height: 16px;
+		margin-right: 6px; */
+	}
+
+	.full-review {
+		color: #0073e6;
+		text-decoration: none;
+		font-weight: bold;
+	}
+
 	.meter{
 		color:#fff;
 		text-align:center;
@@ -248,10 +327,10 @@
 									</div>
 								</div>
 								<div id="reviews" class="tab review">
-									<div class="movie-items">
-	<div class="container">
+									<div>
+	<div class="containe11r">
 		<div class="row ipad-width">
-			<div class="col-md-8">
+			<div>
 				<div class="title-hd">
 					<h2>Critics Reviews</h2>
 					<a href="#" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
@@ -259,237 +338,308 @@
 				<div class="tabs">
 				    <div class="tab-content">
 				        <div id="tab1" class="tab active">
-				            <div class="row">
-				            	<div class="slick-multiItem">
-				            		<div class="slide-it">
-				            			<div class="movie-item">
-											<div class="card" >
-											  <img src="..." class="card-img-top" alt="...">
-											  <div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-												<a href="#" class="btn btn-primary">Go somewhere</a>
-											  </div>
-											</div>
-					            			
-					            		</div>
-				            		</div>
-									<div class="slide-it">
-										<div class="movie-item">
-					            			<div class="card" >
-											  <img src="..." class="card-img-top" alt="...">
-											  <div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-												<a href="#" class="btn btn-primary">Go somewhere</a>
-											  </div>
-											</div>
-					            		</div>
-									</div>
-				            		<div class="slide-it">
-				            			<div class="movie-item">
-					            			<div class="card" >
-											  <img src="..." class="card-img-top" alt="...">
-											  <div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-												<a href="#" class="btn btn-primary">Go somewhere</a>
-											  </div>
-											</div>
-					            		</div>
-				            		</div>
-				            		<div class="slide-it">
-				            			<div class="movie-item">
-					            			<div class="card" >
-											  <img src="..." class="card-img-top" alt="...">
-											  <div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-												<a href="#" class="btn btn-primary">Go somewhere</a>
-											  </div>
-											</div>
-					            		</div>
-				            		</div>
-				            		<div class="slide-it">
-				            			<div class="movie-item">
-					            			<div class="card" >
-											  <img src="..." class="card-img-top" alt="...">
-											  <div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-												<a href="#" class="btn btn-primary">Go somewhere</a>
-											  </div>
-											</div>
-					            		</div>
-				            		</div>
-									<div class="slide-it">
-										<div class="movie-item">
-					            			<div class="card" >
-											  <img src="..." class="card-img-top" alt="...">
-											  <div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-												<a href="#" class="btn btn-primary">Go somewhere</a>
-											  </div>
-											</div>
-					            		</div>
-									</div>
-				            		<div class="slide-it">
-				            			<div class="movie-item">
-					            			<div class="card" >
-											  <img src="..." class="card-img-top" alt="...">
-											  <div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-												<a href="#" class="btn btn-primary">Go somewhere</a>
-											  </div>
-											</div>
-					            		</div>
-				            		</div>	            		
-				            	</div>
-				            </div>
+																	<div class="row">
+																		<div class="multiple-items">
+																			<div class="slide-it" >
+																				<div class="review-card">
+																					<div class="review-header">
+																						<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Nell Minow">
+																						<div>
+																							<div class="critic-name">Lena Moore <span class="top-critic">★ TOP CRITIC</span></div>
+																							<div class="critic-role">Director of “Midnight Mercy”</div>
+																						</div>
+																					</div>
+																					<div class="review-body">
+																						<p>
+																							“Unrelenting and human. This film doesn’t chase trends — it carves its own lane with heart and grit.”
+																						</p>
+																					</div>
+																					<div class="review-footer">
+																						<img class="tomato-icon" src="~/images/uploads/juicy.png" alt="Tomato">
+																						<span style="font-size: 10px;margin-right: 112px;">Rated: B • Jun 16, 2025</span>
+																						<a href="#" class="full-review">Full Review</a>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="slide-it" >
+																				<div class="movie-item">
+																					<div class="review-card">
+																						<div class="review-header">
+																							<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Nell Minow">
+																							<div>
+																								<div class="critic-name">Bradley Vance <span class="top-critic">★ TOP CRITIC</span></div>
+																								<div class="critic-role">Screenwriter of “Dust Country”</div>
+																							</div>
+																						</div>
+																						<div class="review-body">
+																							<p>
+																								“It’s rare to see a story this economical yet emotionally expansive. A quiet storm of a screenplay.”
+																							</p>
+																						</div>
+																						<div class="review-footer">
+																							<img class="tomato-icon" src="~/images/uploads/juicy.png" alt="Tomato">
+																							<span style="font-size: 10px;margin-right: 112px;">Rated: B • Jun 16, 2025</span>
+																							<a href="#" class="full-review">Full Review</a>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="slide-it" >
+																				<div class="movie-item">
+																					<div class="review-card">
+																						<div class="review-header">
+																							<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Nell Minow">
+																							<div>
+																								<div class="critic-name">Simone Alvarez <span class="top-critic">★ TOP CRITIC</span></div>
+																								<div class="critic-role">Producer of “The Burning Floor”</div>
+																							</div>
+																						</div>
+																						<div class="review-body">
+																							<p>
+																								“This is the kind of film that reminds you why producing indies matters. Vision, integrity, and something to say.”
+																							</p>
+																						</div>
+																						<div class="review-footer">
+																							<img class="tomato-icon" src="~/images/uploads/juicy.png" alt="Tomato">
+																							<span style="font-size: 10px;margin-right: 112px;">Rated: B • Jun 16, 2025</span>
+																							<a href="#" class="full-review">Full Review</a>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="slide-it" >
+																				<div class="movie-item">
+																					<div class="review-card">
+																						<div class="review-header">
+																							<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Nell Minow">
+																							<div>
+																								<div class="critic-name">Harold Kim <span class="top-critic">★ TOP CRITIC</span></div>
+																								<div class="critic-role">BAFTA-nominated Actor</div>
+																							</div>
+																						</div>
+																						<div class="review-body">
+																							<p>
+																								“There’s a pulse to this performance-driven story. Raw, exposed, and honest. I’d audition for this world anytime.”
+																							</p>
+																						</div>
+																						<div class="review-footer">
+																							<img class="tomato-icon" src="~/images/uploads/juicy.png" alt="Tomato">
+																							<span style="font-size: 10px;margin-right: 112px;">Rated: B • Jun 16, 2025</span>
+																							<a href="#" class="full-review">Full Review</a>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="slide-it" >
+																				<div class="movie-item">
+																					<div class="review-card">
+																						<div class="review-header">
+																							<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Nell Minow">
+																							<div>
+																								<div class="critic-name">Maya S. <span class="top-critic">★ TOP CRITIC</span></div>
+																								<div class="critic-role">Director</div>
+																							</div>
+																						</div>
+																						<div class="review-body">
+																							<p>
+																								“A visual and emotional tightrope — and it never falls off. Confident filmmaking with soul.”
+																							</p>
+																						</div>
+																						<div class="review-footer">
+																							<img class="tomato-icon" src="~/images/uploads/juicy.png" alt="Tomato">
+																							<span style="font-size: 10px;margin-right: 112px;">Rated: B • Jun 16, 2025</span>
+																							<a href="#" class="full-review">Full Review</a>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="slide-it" >
+																				<div class="movie-item">
+																					<div class="review-card">
+																						<div class="review-header">
+																							<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Nell Minow">
+																							<div>
+																								<div class="critic-name">Chris D. <span class="top-critic">★ TOP CRITIC</span></div>
+																								<div class="critic-role">Screenwriter</div>
+																							</div>
+																						</div>
+																						<div class="review-body">
+																							<p>
+																								“Dialogue that feels lived-in. It doesn’t shout — it breathes. The writing feels like eavesdropping on real lives.”
+																							</p>
+																						</div>
+																						<div class="review-footer">
+																								<img class="tomato-icon" src="~/images/uploads/juicy.png" alt="Tomato">
+																							<span style="font-size: 10px;margin-right: 112px;">Rated: B • Jun 16, 2025</span>
+																							<a href="#" class="full-review">Full Review</a>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="slide-it">
+																				<div class="movie-item">
+																					<div class="review-card">
+																						<div class="review-header">
+																							<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Nell Minow">
+																							<div>
+																								<div class="critic-name">Olivia M. <span class="top-critic">★ TOP CRITIC</span></div>
+																								<div class="critic-role">Producer</div>
+																							</div>
+																						</div>
+																						<div class="review-body">
+																							<p>
+																								“Impossibly polished for the budget. You can see the producing team hustled hard to make every frame count.”
+																							</p>
+																						</div>
+																						<div class="review-footer">
+																								<img class="tomato-icon" src="~/images/uploads/juicy.png" alt="Tomato">
+																							<span style="font-size: 10px;margin-right: 112px;">Rated: B • Jun 16, 2025</span>
+																							<a href="#" class="full-review">Full Review</a>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
 				        </div>
 				    </div>
 				</div>
 				<div class="title-hd">
-					<h2>Audience Reviews</h2>
+															<h2 style="
+    margin: 0;
+">
+																Audience Reviews
+															</h2>
 					<a href="#" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
 				</div>
 				<div class="tabs">
 				    <div class="tab-content">
 				        <div id="tab2" class="tab active">
 				            <div class="row">
-				            	<div class="slick-multiItem">
-				            		<div class="slide-it">
-				            			<div class="movie-item">
-											<div class="card" >
-											  <img src="..." class="card-img-top" alt="...">
-											  <div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-												<a href="#" class="btn btn-primary">Go somewhere</a>
-											  </div>
-											</div>
-					            			
-					            		</div>
+																		<div class="multiple-items">
+																			<div class="slide-it" >
+																				<div class="review-card">
+																					<div class="review-header">
+																						<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Nell Minow">
+																						<div>
+																							<div class="critic-name">Lena M</div>
+																							
+																						</div>
+																					</div>
+																					<div class="review-body">
+																						<p>
+																							Incredibly done! Can’t wait to watch it again.
+																						</p>
+																					</div>
+																					<div class="review-footer">
+																							<img class="tomato-icon" src="~/images/uploads/juicy.png" alt="Tomato">
+																						<span style="font-size: 10px;margin-right: 112px;">Rated: B • Jun 16, 2025</span>
+																						<a href="#" class="full-review">Full Review</a>
+																					</div>
+																				</div>
 				            		</div>
-									<div class="slide-it">
+																			<div class="slide-it" >
 										<div class="movie-item">
-					            			<div class="card" >
-											  <img src="..." class="card-img-top" alt="...">
-											  <div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-												<a href="#" class="btn btn-primary">Go somewhere</a>
-											  </div>
-											</div>
+																					<div class="review-card">
+																						<div class="review-header">
+																							<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Nell Minow">
+																							<div>
+																								<div class="critic-name">Marty Tyson</div>
+																								
+																							</div>
+																						</div>
+																						<div class="review-body">
+																							<p>
+
+																								Stayed so true to the source material but still had its own must-see moments. A beautiful revival.
+
+																							</p>
+																						</div>
+																						<div class="review-footer">
+																								<img class="tomato-icon" src="~/images/uploads/juicy.png" alt="Tomato">
+																							<span style="font-size: 10px;margin-right: 112px;">Rated: B • Jun 16, 2025</span>
+																							<a href="#" class="full-review">Full Review</a>
+																						</div>
+																					</div>
 					            		</div>
 									</div>
-				            		<div class="slide-it">
+																			<div class="slide-it" >
 				            			<div class="movie-item">
-					            			<div class="card" >
-											  <img src="..." class="card-img-top" alt="...">
-											  <div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-												<a href="#" class="btn btn-primary">Go somewhere</a>
-											  </div>
-											</div>
+																					<div class="review-card">
+																						<div class="review-header">
+																							<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Nell Minow">
+																							<div>
+																								<div class="critic-name">Hope Ayala</div>
+																								
+																							</div>
+																						</div>
+																						<div class="review-body">
+																							<p>
+
+																								Overlong and bogged down in dark photography and art direction, this live action remake doesn’t come close to the magic that was the animated original.
+
+																							</p>
+																						</div>
+																						<div class="review-footer">
+																								<img class="tomato-icon" src="~/images/uploads/juicy.png" alt="Tomato">
+																							<span style="font-size: 10px;margin-right: 112px;">Rated: B • Jun 16, 2025</span>
+																							<a href="#" class="full-review">Full Review</a>
+																						</div>
+																					</div>
 					            		</div>
 				            		</div>
-				            		<div class="slide-it">
+																			<div class="slide-it" >
 				            			<div class="movie-item">
-					            			<div class="card" >
-											  <img src="..." class="card-img-top" alt="...">
-											  <div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-												<a href="#" class="btn btn-primary">Go somewhere</a>
-											  </div>
-											</div>
+																					<div class="review-card">
+																						<div class="review-header">
+																							<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Nell Minow">
+																							<div>
+																								<div class="critic-name">Jeff B.</div>
+																							</div>
+																						</div>
+																						<div class="review-body">
+																							<p>
+																								My daughter and I absolutely loved this movie! The actors they selected were spot on compared to their animated version! A must see!!!!! Bravo!!!
+																							</p>
+																						</div>
+																						<div class="review-footer">
+																								<img class="tomato-icon" src="~/images/uploads/juicy.png" alt="Tomato">
+																							<span style="font-size: 10px;margin-right: 112px;">Rated: B • Jun 16, 2025</span>
+																							<a href="#" class="full-review">Full Review</a>
+																						</div>
+																					</div>
 					            		</div>
 				            		</div>
-				            		<div class="slide-it">
+																			<div class="slide-it" >
 				            			<div class="movie-item">
-					            			<div class="card" >
-											  <img src="..." class="card-img-top" alt="...">
-											  <div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-												<a href="#" class="btn btn-primary">Go somewhere</a>
-											  </div>
-											</div>
+																					<div class="review-card">
+																						<div class="review-header">
+																							<img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Nell Minow">
+																							<div>
+																								<div class="critic-name">Tyler D.</div>
+																							</div>
+																						</div>
+																						<div class="review-body">
+																							<p>
+																								im not a big fan of live action remakes, but this was solid!
+																							</p>
+																						</div>
+																						<div class="review-footer">
+																								<img class="tomato-icon" src="~/images/uploads/juicy.png" alt="Tomato">
+																							<span style="font-size: 10px;margin-right: 112px;">Rated: B • Jun 16, 2025</span>
+																							<a href="#" class="full-review">Full Review</a>
+																						</div>
+																					</div>
 					            		</div>
 				            		</div>
-									<div class="slide-it">
-										<div class="movie-item">
-					            			<div class="card" >
-											  <img src="..." class="card-img-top" alt="...">
-											  <div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-												<a href="#" class="btn btn-primary">Go somewhere</a>
-											  </div>
-											</div>
-					            		</div>
-									</div>
-				            		<div class="slide-it">
-				            			<div class="movie-item">
-					            			<div class="card" >
-											  <img src="..." class="card-img-top" alt="...">
-											  <div class="card-body">
-												<h5 class="card-title">Card title</h5>
-												<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-												<a href="#" class="btn btn-primary">Go somewhere</a>
-											  </div>
-											</div>
-					            		</div>
-				            		</div>	            		
+									            		
 				            	</div>
 				            </div>
 				        </div>
 				    </div>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<div class="sidebar">
-					<div class="ads">
-						<img src="images/uploads/ads1.png" alt="" width="336" height="296">
-					</div>
-					<div class="celebrities">
-						<h4 class="sb-title">Spotlight Celebrities</h4>
-						<div class="celeb-item">
-							<a href="#"><img src="images/uploads/ava1.jpg" alt="" width="70" height="70"></a>
-							<div class="celeb-author">
-								<h6><a href="#">Samuel N. Jack</a></h6>
-								<span>Actor</span>
-							</div>
-						</div>
-						<div class="celeb-item">
-							<a href="#"><img src="images/uploads/ava2.jpg" alt="" width="70" height="70"></a>
-							<div class="celeb-author">
-								<h6><a href="#">Benjamin Carroll</a></h6>
-								<span>Actor</span>
-							</div>
-						</div>
-						<div class="celeb-item">
-							<a href="#"><img src="images/uploads/ava3.jpg" alt="" width="70" height="70"></a>
-							<div class="celeb-author">
-								<h6><a href="#">Beverly Griffin</a></h6>
-								<span>Actor</span>
-							</div>
-						</div>
-						<div class="celeb-item">
-							<a href="#"><img src="images/uploads/ava4.jpg" alt="" width="70" height="70"></a>
-							<div class="celeb-author">
-								<h6><a href="#">Justin Weaver</a></h6>
-								<span>Actor</span>
-							</div>
-						</div>
-						<a href="#" class="btn">See all celebrities<i class="ion-ios-arrow-right"></i></a>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 	</div>
 </div>
