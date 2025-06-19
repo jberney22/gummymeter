@@ -7204,8 +7204,8 @@ ul {
     padding: 18px;
     display: flex;
     flex-direction: column;
-    background-color: #07101a;
-    border: 3px solid #0c1c2c;
+    /*background-color: #07101a;
+    border: 3px solid #0c1c2c;*/
 }
 
 .movie-single .movie-img .movie-btn a,

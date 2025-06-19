@@ -258,14 +258,7 @@
 												@if (Model.Writers != null && Model.Writers.Any())
 												{
 													<p>
-														@* @foreach (var writer in Model.Writers)
-														{
-															<span class="badge bg-secondary me-1">@writer</span>
-														}  *@
-
-														<span>
-															@string.Join(", ", Model.Writers)</span>
-
+														<span>@string.Join(", ", Model.Writers)</span>
 													</p>
 												}
 
@@ -287,16 +280,10 @@
 												@if (Model.Movie.Genres != null && Model.Movie.Genres.Any())
 												{
 													<p>
-														@* @foreach (var genre in Model.Movie.Genres)
-														{
-															<span class="badge bg-secondary me-1">@genre</span>
-														} *@
 														<span class="badge bg-secondary me-1">@Model.Movie.GenresFormatted</span>
 													</p>
 												}
-												@* <p>
-													<a href="#">Action, </a> <a href="#"> Sci-Fi,</a> <a href="#">Adventure</a>
-												</p> *@
+												
 											</div>
 											<div class="sb-it">
 												<h6>Release Date:</h6>
@@ -310,16 +297,7 @@
 												<h6>MMPA Rating:</h6>
 												<p>@Model.Movie.MPARating</p>
 											</div>
-											@* <div class="sb-it">
-												<h6>Plot Keywords:</h6>
-												<p class="tags">
-													<span class="time"><a href="#">superhero</a></span>
-													<span class="time"><a href="#">marvel universe</a></span>
-													<span class="time"><a href="#">comic</a></span>
-													<span class="time"><a href="#">blockbuster</a></span>
-													<span class="time"><a href="#">final battle</a></span>
-												</p>
-											</div> *@
+											
 											<div class="ads">
 												<img src="/images/uploads/ads1.png" alt="">
 											</div>
@@ -1047,6 +1025,7 @@
 @section Scripts{
 	<script>
 		$(function(){
+		  $('.tabs .tab-links a, .tab-links-2 a, .tab-links-3 a').click();
 
 		  var $form   = $('#ajaxReviewForm'),
 			  $btn    = $form.find('button[type="submit"]'),

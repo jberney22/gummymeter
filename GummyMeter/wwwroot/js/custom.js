@@ -53,7 +53,7 @@ $(function(){
 	var multiItem2 = $('.slick-multiItem2');
 
 	var tempJBMultiple = $('.multiple-items');
-
+	
 	
 
 	tabsClick.on('click', function(e)  {
