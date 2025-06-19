@@ -3,7 +3,7 @@
 @using System.Text.Json
 @using GummyMeter.Helpers
 @{
-	ViewData["Title"] = "Movie Details";
+	ViewData["Title"] = Model.Movie.Title;
 	//var movie = ViewBag.Movie;
 }
 <style>
@@ -192,7 +192,7 @@
 					<div class="movie-tabs" style="margin-top:2rem;">
 						<div class="tabs">
 							<ul class="tab-links tabs-mv">
-								<li class="active"><a href="#overview">Overview</a></li>
+								@* <li class="active"><a href="#overview">Overview</a></li> *@
 								<li><a href="#reviews"> Reviews</a></li>
 								@*<li><a href="#cast">  Cast & Crew </a></li>
 							 	<li><a href="#media"> Media</a></li>
