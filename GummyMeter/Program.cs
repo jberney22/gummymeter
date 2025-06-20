@@ -27,6 +27,19 @@ var app = builder.Build();
 // Configure middleware
 if (!app.Environment.IsDevelopment())
 {
+    app.Use(async (context, next) =>
+    {
+        var request = context.Request;
+
+        if (request.Host.Host.StartsWith("www.") == false)
+        {
+            var wwwHost = new HostString("www." + request.Host.Host);
+            var newUrl = Uri.UriSchemeHttps + "://" + wwwHost + request.Path + request.QueryString;
+            context.Response.Redirect(newUrl, permanent: true);
+            return;
+        }
+        await next();
+    });
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
